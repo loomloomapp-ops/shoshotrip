@@ -1,0 +1,320 @@
+/* =====================================================================
+   ShoSho Trip — cinematic brand preloader
+   Palette pulled from the site design system (globals.css):
+     forest-deep #203f2c · milk #f6f2ea · lime #a8e10c · ink #14201c
+   Only transform / opacity / clip-path / custom props are animated.
+   ===================================================================== */
+
+.sho-preloader {
+  --pl-bg: #203f2c;
+  --pl-logo: #f6f2ea;
+  --pl-line: #a8e10c;
+  --pl-veil: 1;
+
+  position: fixed;
+  inset: 0;
+  z-index: 2147483000; /* above everything, incl. sticky header + widgets */
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: var(--pl-bg);
+  color: var(--pl-logo);
+  isolation: isolate;
+  min-height: 100svh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Opening darkness — lifts within the first beat. */
+.sho-preloader::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: #0b1310;
+  opacity: var(--pl-veil);
+  pointer-events: none;
+}
+
+/* Film grain — a fixed, pointer-safe noise layer. */
+.sho-grain {
+  position: absolute;
+  inset: -50%;
+  z-index: 4;
+  pointer-events: none;
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  background-size: 220px 220px;
+  animation: sho-grain-shift 1.1s steps(3) infinite;
+}
+@keyframes sho-grain-shift {
+  0% { transform: translate(0, 0); }
+  33% { transform: translate(-2%, 1%); }
+  66% { transform: translate(1%, -2%); }
+  100% { transform: translate(0, 0); }
+}
+
+/* Soft vignette. */
+.sho-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(120% 100% at 50% 46%, transparent 46%, rgba(6, 14, 11, 0.66) 100%);
+}
+
+/* Central glow — anchored at 50%/50%; GSAP keeps xPercent/yPercent:-50 while
+   it scales, so centering survives the transform. */
+.sho-glow {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 2;
+  width: min(78vw, 700px);
+  height: min(78vw, 700px);
+  pointer-events: none;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(168, 225, 12, 0.18) 0%, rgba(168, 225, 12, 0.06) 34%, transparent 66%);
+  filter: blur(8px);
+}
+
+/* Stage — the composed centre. */
+.sho-stage {
+  position: relative;
+  z-index: 5;
+  display: grid;
+  justify-items: center;
+  gap: clamp(1.5rem, 4vw, 2.6rem);
+  padding: 0 6vw;
+  width: 100%;
+}
+
+/* Route / horizon line — sits low in the frame, clear of the emblem. */
+.sho-route {
+  position: absolute;
+  left: 50%;
+  bottom: 15%;
+  translate: -50% 0;
+  z-index: 5;
+  width: min(72vw, 620px);
+  height: auto;
+  overflow: visible;
+  pointer-events: none;
+}
+.sho-route__line {
+  fill: none;
+  stroke: var(--pl-line);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  filter: drop-shadow(0 0 6px rgba(168, 225, 12, 0.5));
+}
+.sho-route__dot {
+  fill: var(--pl-line);
+  filter: drop-shadow(0 0 8px rgba(168, 225, 12, 0.9));
+}
+
+/* Emblem. */
+.sho-logo {
+  position: relative;
+  width: clamp(190px, 34vw, 340px);
+  aspect-ratio: 1441 / 1147;
+  will-change: transform, opacity;
+}
+.sho-logo svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.sho-illus {
+  will-change: clip-path, filter;
+}
+.sho-illus path {
+  fill: var(--pl-logo);
+}
+.sho-word path {
+  fill: none;
+  stroke: var(--pl-logo);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Tagline + counter. */
+.sho-tagline {
+  position: relative;
+  z-index: 5;
+  margin: 0;
+  font-family: var(--font-display, system-ui);
+  font-size: clamp(0.62rem, 1.6vw, 0.78rem);
+  font-weight: 500;
+  letter-spacing: 0.42em;
+  text-indent: 0.42em;
+  text-transform: uppercase;
+  color: var(--pl-line);
+  opacity: 0;
+}
+
+.sho-counter {
+  position: absolute;
+  right: clamp(1.25rem, 4vw, 2.75rem);
+  bottom: clamp(1.25rem, 4vw, 2.4rem);
+  z-index: 5;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5ch;
+  font-family: var(--font-sans, system-ui);
+  font-size: clamp(0.72rem, 1.4vw, 0.9rem);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.14em;
+  color: rgba(246, 242, 234, 0.62);
+  opacity: 0;
+}
+.sho-counter__cur { color: var(--milk, #f6f2ea); font-weight: 600; }
+.sho-counter__sep { opacity: 0.55; }
+
+/* Lime pulse — anchored at centre; GSAP holds xPercent/yPercent:-50 while it
+   blooms (margin:auto can't centre an element larger than the viewport). */
+.sho-pulse {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 6;
+  width: 150vmax;
+  height: 150vmax;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(circle, rgba(168, 225, 12, 0.9) 0%, rgba(168, 225, 12, 0.4) 34%, transparent 62%);
+  will-change: transform, opacity;
+}
+
+/* Ridge portal panels. */
+.sho-panels {
+  position: absolute;
+  inset: 0;
+  z-index: 7;
+  pointer-events: none;
+}
+.sho-panel {
+  position: absolute;
+  left: -2%;
+  width: 104%;
+  height: 62%;
+  background: #a8e10c;
+  will-change: transform;
+  opacity: 0;         /* hidden until the reveal step — the scene plays behind */
+  visibility: hidden;
+}
+.sho-panel--top {
+  top: 0;
+  /* soft mountain-ridge lower edge */
+  clip-path: polygon(0 0, 100% 0, 100% 86%, 74% 78%, 50% 90%, 26% 78%, 0 86%);
+}
+.sho-panel--bottom {
+  bottom: 0;
+  clip-path: polygon(0 14%, 26% 22%, 50% 10%, 74% 22%, 100% 14%, 100% 100%, 0 100%);
+}
+
+/* Repeat visit within the session — hidden from first paint. */
+html.sho-seen .sho-preloader {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Scroll lock while active. */
+html.sho-lock,
+html.sho-lock body {
+  overflow: hidden !important;
+  height: 100%;
+  overscroll-behavior: none;
+  touch-action: none;
+}
+
+/* =====================================================================
+   Hero reveal — gated purely by <html> classes, no markup changes.
+   Only the foreground hero content + header animate; the hero media
+   (background) is left untouched so it shows through the portal.
+   ===================================================================== */
+html.sho-reveal-pending .site-header {
+  transform: translateY(-115%);
+}
+html.sho-reveal-pending .hero__title {
+  opacity: 0;
+  clip-path: inset(0 0 100% 0);
+  transform: translateY(14px);
+}
+html.sho-reveal-pending .hero__subtitle {
+  opacity: 0;
+  transform: translateY(22px);
+}
+html.sho-reveal-pending .hero__actions {
+  opacity: 0;
+  transform: translateY(18px);
+}
+html.sho-reveal-pending .hero__bottom {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+html.sho-revealing .site-header {
+  transform: none;
+  transition: transform 0.7s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)) 0.15s;
+}
+html.sho-revealing .hero__title {
+  opacity: 1;
+  clip-path: inset(0 0 0 0);
+  transform: none;
+  transition: opacity 0.85s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)) 0.2s,
+    clip-path 0.9s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)) 0.2s,
+    transform 0.85s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)) 0.2s;
+}
+html.sho-revealing .hero__subtitle {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.8s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)) 0.34s,
+    transform 0.8s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)) 0.34s;
+}
+html.sho-revealing .hero__actions {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.7s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)) 0.48s,
+    transform 0.7s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)) 0.48s;
+}
+html.sho-revealing .hero__bottom {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.8s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)) 0.52s,
+    transform 0.8s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)) 0.52s;
+}
+
+/* =====================================================================
+   Mobile — centred emblem, lighter scene, no side chrome.
+   ===================================================================== */
+@media (max-width: 640px) {
+  .sho-logo { width: clamp(150px, 58vw, 240px); }
+  .sho-tagline,
+  .sho-counter { display: none; }
+  .sho-grain { opacity: 0.045; animation: none; }
+  .sho-route { width: 84vw; }
+  .sho-panel { height: 60%; }
+}
+
+/* =====================================================================
+   Reduced motion — the JS runs a minimal fade; make sure nothing here
+   fights it and the scene stays quiet.
+   ===================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .sho-grain,
+  .sho-glow { animation: none; }
+  html.sho-revealing .site-header,
+  html.sho-revealing .hero__title,
+  html.sho-revealing .hero__subtitle,
+  html.sho-revealing .hero__actions,
+  html.sho-revealing .hero__bottom {
+    transition-duration: 0.4s;
+  }
+}
