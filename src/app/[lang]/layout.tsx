@@ -16,15 +16,13 @@ import { PreloaderGate } from "@/components/preloader/PreloaderGate";
 /**
  * Runs before hydration: sets up the brand preloader so the hero never flashes
  * and the site always opens even if the client bundle fails.
- *   - repeat session visit  → mark seen so the overlay is hidden from paint
- *   - first visit           → lock scroll + hide hero for the reveal
+ *   - every page load       → lock scroll + hide hero for the reveal
+ *   - reduced motion         → skip the pending-reveal hide (minimal fade)
  *   - failsafe timeout       → force the site open if the client never boots
  */
 const PRELOADER_BOOT = `(function(){try{
 var d=document.documentElement;
-var seen;try{seen=sessionStorage.getItem('sho_pl_seen')==='1';}catch(e){seen=false;}
 var rm=false;try{rm=matchMedia('(prefers-reduced-motion: reduce)').matches;}catch(e){}
-if(seen){d.classList.add('sho-seen');return;}
 d.classList.add('sho-lock');
 if(!rm)d.classList.add('sho-reveal-pending');
 setTimeout(function(){

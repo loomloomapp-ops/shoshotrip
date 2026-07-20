@@ -16,15 +16,13 @@ import "./travel-preloader.css";
  * (two panels part) onto the hero.
  *
  * Contract:
- *  - Runs at most once per browser session (sessionStorage). Repeat visits get
- *    an instant fade.
+ *  - Plays on every page load / refresh (no session gating).
  *  - Honours prefers-reduced-motion with a minimal fade sequence.
  *  - Locks scroll while active, restores + removes itself from the DOM after.
  *  - A failsafe timeout guarantees the site opens even if something throws.
  *  - Only transform / opacity / clip-path / custom props are animated.
  */
 
-const SEEN_KEY = "sho_pl_seen";
 const FAILSAFE_MS = 7000;
 
 // Horizon / route line drawn low in the frame (viewBox 0 0 1000 120).
@@ -80,29 +78,9 @@ export function TravelPreloader({
       teardown();
     }, FAILSAFE_MS);
 
-    let seen = false;
-    try {
-      seen = sessionStorage.getItem(SEEN_KEY) === "1";
-    } catch {
-      /* private mode */
-    }
-    try {
-      sessionStorage.setItem(SEEN_KEY, "1");
-    } catch {
-      /* ignore */
-    }
-
     const reduce =
       typeof window.matchMedia === "function" &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    // Repeat visit within the session: instant, no choreography.
-    if (seen) {
-      gsap.to(root, { autoAlpha: 0, duration: 0.35, ease: "power2.out", onComplete: teardown });
-      return () => {
-        if (failsafe) window.clearTimeout(failsafe);
-      };
-    }
 
     const isMobile = window.matchMedia("(max-width: 640px)").matches;
     const speed = isMobile ? 0.83 : 1; // ~17% shorter on mobile
