@@ -30,9 +30,25 @@
   transition: transform 0.4s var(--ease-out), background-color 0.3s var(--ease-out),
     border-color 0.3s var(--ease-out);
 }
-.site-header.is-scrolled {
+/* Frosted bar lives on a pseudo-element, NOT on .site-header itself: a
+   backdrop-filter on the header would make it the containing block for its
+   fixed-position descendant (the full-screen mobile menu), clamping the menu
+   to the header height. Keeping the filter on ::before frees the menu to fill
+   the viewport. */
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
   background: rgba(246, 242, 234, 0.92);
+  -webkit-backdrop-filter: saturate(160%) blur(14px);
   backdrop-filter: saturate(160%) blur(14px);
+  opacity: 0;
+  transition: opacity 0.3s var(--ease-out);
+  pointer-events: none;
+}
+.site-header.is-scrolled::before { opacity: 1; }
+.site-header.is-scrolled {
   border-color: var(--border);
   box-shadow: 0 8px 30px -24px rgba(20, 32, 28, 0.5);
 }
@@ -432,14 +448,17 @@
     padding-bottom: clamp(1.5rem, 4vh, 2.4rem);
   }
   .hero__top { padding-top: calc(var(--header-h) + 2.4rem); gap: 1.1rem; }
-  /* Tours sit at the bottom of the first screen (see mobile screenshot). */
-  .hero__bottom { position: static; margin-top: auto; }
+  /* Tours sit at the bottom of the first screen (see mobile screenshot).
+     padding-top guarantees a gap between the CTA and the tours even when the
+     viewport is short and margin:auto collapses to zero. */
+  .hero__bottom { position: static; margin-top: auto; padding-top: clamp(1.5rem, 5vh, 2.5rem); }
   .hero__scrim { background: linear-gradient(180deg, rgba(20,32,28,0.55) 0%, rgba(20,32,28,0.32) 42%, rgba(20,32,28,0.82) 100%); }
   .hero .cta--lg .cta__label { font-size: 0.95rem; padding: 0.9rem 1.4rem; }
   .hero .cta--lg .cta__go { width: 48px; height: 48px; }
-  /* Sized so the three explicit lines fit within a phone width (Unbounded is a
-     wide face); the `||` + `\n` breaks define the three-line split. */
-  .hero__title { font-size: clamp(1.75rem, 6.6vw, 2.5rem); max-width: none; margin-inline: auto; }
+  /* Sized so the three explicit lines each stay on a single row within a phone
+     width (Unbounded is a wide face) — the third line "що справді живеш" must
+     not wrap. The `||` + `\n` breaks define the three-line split. */
+  .hero__title { font-size: clamp(1.45rem, 5.6vw, 2.3rem); line-height: 1.08; max-width: none; margin-inline: auto; }
   /* Secondary text sits directly under the heading. */
   .hero__top .hero__subtitle { display: block; font-size: 1rem; max-width: 40ch; }
   /* Hide the rating card on mobile only. */
@@ -454,6 +473,10 @@
   .hero-slide { flex: 0 0 78%; }
   /* Tighten the gap between the cards and the pagination row. */
   .hero-slider__nav { margin-top: 0.55rem; }
+  /* Lead copy in the "Available tours" and "Why ShoSho Trip" blocks reads at
+     16px on phones (owner request). */
+  #tours .section-head .lead,
+  .why-desc { font-size: 16px; }
 }
 
 /* ---- Section head layout (tours-section split) ---- */
@@ -891,10 +914,12 @@
 
 @media (max-width: 767px) {
   .why-stage { min-height: 72vh; }
-  /* Animated card fills the stage width and centres over the image on phones. */
+  /* Animated card centres over the image on phones. Keep a clear inset from the
+     stage edges so the card floats with breathing room, like the desktop card,
+     instead of hugging the image edges. */
   .why-cards--anim .why-card {
-    left: clamp(0.9rem, 4vw, 1.25rem);
-    right: clamp(0.9rem, 4vw, 1.25rem);
+    left: clamp(1.5rem, 7vw, 2.25rem);
+    right: clamp(1.5rem, 7vw, 2.25rem);
     width: auto;
     min-height: clamp(220px, 42vh, 280px);
     padding: clamp(1.4rem, 5vw, 1.85rem);
