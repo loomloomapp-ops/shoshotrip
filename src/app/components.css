@@ -268,12 +268,14 @@
   /* Keep the authored break for the hero title (its second line), the FAQ
      contact line, the closing CTA copy, the founders lead and the reviews title
      on every viewport (the segments still wrap naturally if too long). */
-  .hero__title .soft-br,
-  .emotions__title .soft-br,
   .faq-aside__sub .soft-br,
   .final-cta__inner .soft-br,
   .founders-lead .soft-br,
   #reviews .soft-br { display: inline; }
+  /* At 32px the hero + emotions headings wrap naturally (they cannot fit the
+     authored 3-line split at this size), so suppress their manual breaks. */
+  .hero__title .mobile-br,
+  .emotions__title .mobile-br { display: none; }
 }
 .hero__actions {
   display: flex;
@@ -439,6 +441,11 @@
   .hero-slider { width: 100%; }
   .hero-slide { flex: 0 0 72%; }
 }
+/* All section headings sit at 32px on phones (owner request). Hero title and
+   the emotions title carry their own 32px rules below (with line breaks). */
+@media (max-width: 767px) {
+  h2 { font-size: 32px; }
+}
 @media (max-width: 767px) {
   /* Full first screen: heading + subtitle at the top, tours pinned to the
      bottom edge. Flex column lets the bottom row push down with margin:auto. */
@@ -456,10 +463,9 @@
   .hero__scrim { background: linear-gradient(180deg, rgba(20,32,28,0.55) 0%, rgba(20,32,28,0.32) 42%, rgba(20,32,28,0.82) 100%); }
   .hero .cta--lg .cta__label { font-size: 0.95rem; padding: 0.9rem 1.4rem; }
   .hero .cta--lg .cta__go { width: 48px; height: 48px; }
-  /* Sized so the three explicit lines each stay on a single row within a phone
-     width (Unbounded is a wide face) — the third line "що справді живеш" must
-     not wrap. The `||` + `\n` breaks define the three-line split. */
-  .hero__title { font-size: clamp(1.45rem, 5.6vw, 2.3rem); line-height: 1.08; max-width: none; margin-inline: auto; }
+  /* All headings sit at 32px on phones (owner request). The `||` + `\n` breaks
+     keep the hero title on three lines at this size. */
+  .hero__title { font-size: 32px; line-height: 1.1; max-width: none; margin-inline: auto; }
   /* Secondary text sits directly under the heading. */
   .hero__top .hero__subtitle { display: block; font-size: 1rem; max-width: 40ch; }
   /* Hide the rating card on mobile only. */
@@ -666,11 +672,8 @@
   .emotions-card--large { width: clamp(400px, 72vw, 520px); }
 }
 @media (max-width: 767px) {
-  /* Heading reads as three lines on phones: sentence one on its own row, the
-     second sentence split across two. Smaller size so "Це складно описати."
-     stays on a single row (the `\n` + `||` markers define the split). */
-  .emotions__title { font-size: clamp(1.5rem, 6.4vw, 2rem); line-height: 1.12; }
-  .emotions__title .mobile-br { display: inline; }
+  /* 32px to match the other headings; wraps naturally at this size. */
+  .emotions__title { font-size: 32px; line-height: 1.12; }
   .emotions-rail {
     --card-h: clamp(420px, 64vh, 500px);
     --card-h-video: calc(var(--card-h) + 24px); /* subtle on phones, no overflow */
