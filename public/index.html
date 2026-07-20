@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>ShoSho Trip</title>
+    <link rel="canonical" href="/ua/" />
+    <link rel="icon" href="/favicon.svg" />
+    <meta http-equiv="refresh" content="0; url=/ua/" />
+    <style>
+      html { background: #203f2c; }
+    </style>
+    <script>
+      // Send English browsers to /en/, everyone else to /ua/ (default).
+      (function () {
+        try {
+          var l = (navigator.language || "ua").toLowerCase();
+          location.replace(l.indexOf("en") === 0 ? "/en/" : "/ua/");
+        } catch (e) {
+          location.replace("/ua/");
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <noscript><a href="/ua/">ShoSho Trip</a></noscript>
+  </body>
+</html>

@@ -16,3 +16,7 @@ tsconfig.tsbuildinfo
 # Local reference-only material (photos, .MOV clips, exported Webflow template).
 # Not part of the deployable site — keep it out of the repo.
 /assets
+
+# Static-export lead secrets + runtime log (live only on the server)
+/public/lead.config.php
+/public/leads.log

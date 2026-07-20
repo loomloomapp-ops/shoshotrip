@@ -70,7 +70,7 @@ export function LeadForm({
 
     setStatus("loading");
     try {
-      const res = await fetch("/api/lead", {
+      const res = await fetch(process.env.NEXT_PUBLIC_LEAD_ENDPOINT || "/lead.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

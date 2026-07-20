@@ -6,11 +6,14 @@ export function isLocale(value: string): value is Locale {
   return (locales as readonly string[]).includes(value);
 }
 
-/** Build a locale-aware path. UA is the root ("/"), EN is prefixed ("/en"). */
+/**
+ * Build a locale-aware path. Both locales are prefixed ("/ua", "/en") so the
+ * static export maps 1:1 to real files and client-side routing works without a
+ * server rewrite. The site root ("/") redirects to the default locale.
+ */
 export function localePath(locale: Locale, path = ""): string {
-  const clean = path.replace(/^\/+/, "");
-  const base = locale === defaultLocale ? "" : `/${locale}`;
-  return `${base}/${clean}`.replace(/\/+$/, "") || "/";
+  const clean = path.replace(/^\/+/, "").replace(/\/+$/, "");
+  return clean ? `/${locale}/${clean}` : `/${locale}`;
 }
 
 /** hreflang code for <link> / metadata. */

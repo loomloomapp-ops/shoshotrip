@@ -2,18 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { locales, defaultLocale, type Locale } from "@/lib/i18n";
+import { locales, type Locale } from "@/lib/i18n";
 import { track } from "@/lib/analytics";
 
-/** Swap locale while preserving the current path (UA=root, EN=/en). */
+/** Swap locale while preserving the current path. Both locales are prefixed. */
 function swapLocale(pathname: string, current: Locale, target: Locale): string {
-  // Strip the current locale prefix to get the shared path.
-  let shared = pathname;
-  if (current !== defaultLocale) {
-    shared = pathname.replace(new RegExp(`^/${current}`), "") || "/";
-  }
-  if (target === defaultLocale) return shared || "/";
-  return `/${target}${shared === "/" ? "" : shared}`;
+  // Strip the current locale prefix (with or without a trailing slash).
+  const shared = pathname.replace(new RegExp(`^/${current}(?=/|$)`), "");
+  return `/${target}${shared}`.replace(/\/+$/, "") || `/${target}`;
 }
 
 export function LanguageSwitcher({ locale }: { locale: Locale }) {
