@@ -1425,9 +1425,22 @@ section.founders { background: #FAEFE3; }
   .site-footer__fund { grid-column: 1 / -1; }
 }
 @media (max-width: 560px) {
-  .site-footer__top { grid-template-columns: 1fr; }
-  .fund__body { grid-template-columns: 1fr; align-items: start; }
-  .fund__aside { flex-direction: row; align-items: center; justify-content: space-between; }
+  /* Fund card first, then logo + the rest — all centered. */
+  .site-footer__top { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+  .site-footer__brand { align-items: center; }
+  .site-footer__tagline { max-width: 34ch; }
+  .site-footer__contacts { align-items: center; }
+  .site-footer__socials { justify-content: center; }
+  .site-footer__col ul { align-items: center; }
+
+  .site-footer__fund { order: -1; text-align: center; }
+  .fund__photos { justify-content: center; padding-left: 0; }
+  .fund__body { grid-template-columns: 1fr; justify-items: center; align-items: start; }
+  .fund__copy { text-align: center; }
+  .fund__text { max-width: 34ch; margin-inline: auto; }
+  .fund__aside { flex-direction: row; align-items: center; justify-content: center; gap: 1.5rem; }
+
+  .site-footer__bottom { justify-content: center; text-align: center; }
 }
 
 /* ---- Sticky CTA (mobile) ---- */
