@@ -188,11 +188,11 @@ export function TravelPreloader({
           0.65
         )
 
-        // 5 — lime pulse inverts the palette.
+        // 5 — yellow pulse inverts the palette.
         .to(q(".sho-pulse"), { autoAlpha: 1, scale: 1, duration: 0.6 * speed, ease: "power2.out" }, 2.35 * speed)
         .to(
           root,
-          { "--pl-bg": "#a8e10c", "--pl-logo": "#203f2c", duration: 0.5 * speed, ease: "power2.inOut" },
+          { "--pl-bg": "#dcff00", "--pl-logo": "#4a37a5", duration: 0.5 * speed, ease: "power2.inOut" },
           "<0.05"
         )
         .to(q(".sho-tagline, .sho-counter, .sho-route"), { autoAlpha: 0, duration: 0.3 }, "<")

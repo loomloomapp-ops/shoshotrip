@@ -1,14 +1,14 @@
 /* =====================================================================
    ShoSho Trip — cinematic brand preloader
    Palette pulled from the site design system (globals.css):
-     forest-deep #203f2c · milk #f6f2ea · lime #a8e10c · ink #14201c
+     forest-deep #4a37a5 · milk #f6f2ea · lime #dcff00 · ink #14201c
    Only transform / opacity / clip-path / custom props are animated.
    ===================================================================== */
 
 .sho-preloader {
-  --pl-bg: #203f2c;
+  --pl-bg: #4a37a5;
   --pl-logo: #f6f2ea;
-  --pl-line: #a8e10c;
+  --pl-line: #dcff00;
   --pl-veil: 1;
 
   position: fixed;
@@ -203,7 +203,7 @@
   left: -2%;
   width: 104%;
   height: 62%;
-  background: #a8e10c;
+  background: #dcff00;
   will-change: transform;
   opacity: 0;         /* hidden until the reveal step — the scene plays behind */
   visibility: hidden;

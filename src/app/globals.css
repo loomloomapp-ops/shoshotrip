@@ -1,11 +1,11 @@
 /* =====================================================================
    ShoSho Trip — global design system
    Proportions/type-scale/rhythm adapted from the Tripvana layout system.
-   Palette re-themed to a natural outdoor identity.
+   Palette themed to the client brand: iris purple / reddish orange / cadmium yellow.
    ===================================================================== */
 
 :root {
-  /* ---- Palette: warm outdoor ---- */
+  /* ---- Palette: client brand (purple / orange / yellow) ---- */
   --graphite: #1b2321;        /* deep graphite — dark sections, headings on light */
   --graphite-2: #232d2a;
   --ink: #14201c;             /* primary text (not pure black) */
@@ -13,14 +13,14 @@
   --milk-2: #efe8db;          /* alt light surface */
   --paper: #fbf9f3;           /* elevated surface */
   --white: #ffffff;
-  --forest: #2f5d3f;          /* natural green — brand primary */
-  --forest-deep: #203f2c;
-  --forest-soft: #e5ede4;
-  --terracotta: #c25e3a;      /* earthy accent — primary CTA */
-  --terracotta-deep: #a94d2d;
+  --forest: #6450d2;          /* iris purple — brand primary */
+  --forest-deep: #4a37a5;
+  --forest-soft: #eceafb;
+  --terracotta: #ff5528;      /* reddish orange — primary CTA */
+  --terracotta-deep: #e23c12;
   --sand: #cdb79a;
-  --lime: #a8e10c;            /* hero spark accent (reference circle + stars) */
-  --lime-deep: #93c70a;
+  --lime: #dcff00;            /* cadmium yellow — hero spark accent (circle + stars) */
+  --lime-deep: #c4e000;
 
   --text: #14201c;
   --text-muted: #5c6863;
