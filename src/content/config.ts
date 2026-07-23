@@ -9,6 +9,9 @@ export const siteConfig = {
   phoneDisplay: "+380 67 147 00 07",
   phoneHref: "tel:+380671470007",
 
+  emailDisplay: "hi@shoshotrip.com",
+  emailHref: "mailto:hi@shoshotrip.com",
+
   whatsapp: "https://wa.me/380671470007",
   telegram: "https://t.me/shoshotrip",
   telegramDisplay: "@shoshotrip",

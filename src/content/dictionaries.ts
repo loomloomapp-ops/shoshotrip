@@ -239,6 +239,14 @@ export const dictionaries = {
       docs: "Документи",
       rights: "Усі права захищено.",
       requisites: "Реквізити: ",
+      fund: {
+        eyebrow: "Ми в Африці.",
+        title: "Допомагаємо дітям Африки.",
+        text: "Частина наших прибутків йде на підтримку дітей в Африці.",
+        cta: "Підтримати фонд",
+        qrAlt: "QR-код фонду підтримки дітей Африки",
+      },
+      ask: "Є питання про тур?",
     },
     form: {
       name: "Ваше ім’я",
@@ -567,6 +575,14 @@ export const dictionaries = {
       docs: "Documents",
       rights: "All rights reserved.",
       requisites: "Business details: ",
+      fund: {
+        eyebrow: "We are in Africa.",
+        title: "We help children in Africa.",
+        text: "Part of our profit goes to support children in Africa.",
+        cta: "Support the fund",
+        qrAlt: "QR code of the fund supporting children in Africa",
+      },
+      ask: "Have a question about a tour?",
     },
     form: {
       name: "Your name",

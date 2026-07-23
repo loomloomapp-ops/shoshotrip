@@ -36,6 +36,25 @@ export function PackageSlider({
     };
   }, [reduce, paused, count]);
 
+  // Touch / pointer swipe — drag the images sideways to change slide. The
+  // transform track isn't natively scrollable, so we translate a horizontal
+  // drag past a threshold into a prev/next step.
+  const drag = useRef<{ x: number; y: number; active: boolean }>({ x: 0, y: 0, active: false });
+  const onPointerDown = (e: React.PointerEvent) => {
+    if (count < 2 || e.pointerType === "mouse") return; // keep desktop on arrows
+    drag.current = { x: e.clientX, y: e.clientY, active: true };
+    setPaused(true);
+  };
+  const onPointerEnd = (e: React.PointerEvent) => {
+    if (!drag.current.active) return;
+    drag.current.active = false;
+    const dx = e.clientX - drag.current.x;
+    const dy = e.clientY - drag.current.y;
+    // Ignore mostly-vertical gestures so page scroll still works.
+    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) go(index + (dx < 0 ? 1 : -1));
+    setPaused(false);
+  };
+
   return (
     <div
       className="td-slider"
@@ -45,7 +64,13 @@ export function PackageSlider({
       onBlurCapture={() => setPaused(false)}
       aria-roledescription="carousel"
     >
-      <div className="td-slider__viewport">
+      <div
+        className="td-slider__viewport"
+        onPointerDown={onPointerDown}
+        onPointerUp={onPointerEnd}
+        onPointerCancel={onPointerEnd}
+        style={{ touchAction: "pan-y" }}
+      >
         <div
           className="td-slider__track"
           style={{ ["--i" as string]: index }}

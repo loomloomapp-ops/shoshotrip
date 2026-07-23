@@ -131,6 +131,12 @@ export const Heart = (p: SVGProps<SVGSVGElement>) => (
     <path d="M12 20.3 4.6 13a4.6 4.6 0 0 1 6.5-6.5l.9.9.9-.9A4.6 4.6 0 0 1 19.4 13Z" />
   </svg>
 );
+export const Mail = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base(p)}>
+    <rect x="3" y="5" width="18" height="14" rx="2" />
+    <path d="m3.5 7 8.5 6 8.5-6" />
+  </svg>
+);
 export const Camera = (p: SVGProps<SVGSVGElement>) => (
   <svg {...base(p)}>
     <path d="M4 8.5A2 2 0 0 1 6 6.5h1.4l1.1-1.8A1 1 0 0 1 9.4 4.2h5.2a1 1 0 0 1 .9.5L16.6 6.5H18a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z" />

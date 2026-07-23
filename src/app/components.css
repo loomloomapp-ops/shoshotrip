@@ -1386,17 +1386,55 @@ section.founders { background: #FAEFE3; }
   border-radius: 25px;
 }
 @media (max-width: 767px) { .site-footer { margin: 6px; border-radius: 16px; } }
-.site-footer__top { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 2rem; padding-bottom: 2.5rem; border-bottom: 1px solid rgba(246,242,234,0.16); justify-items: center; text-align: center; }
-.site-footer__brand { display: flex; flex-direction: column; gap: 1.1rem; align-items: center; }
-.site-footer__tagline { color: var(--on-dark-muted); max-width: 34ch; }
+.site-footer__top { display: grid; grid-template-columns: 1.15fr 0.8fr 0.8fr 1.75fr; gap: clamp(1.5rem, 3vw, 3rem); padding-bottom: 2.5rem; border-bottom: 1px solid rgba(246,242,234,0.16); align-items: start; text-align: left; }
+.site-footer__brand { display: flex; flex-direction: column; gap: 1.1rem; align-items: flex-start; }
+.site-footer__tagline { color: var(--on-dark-muted); max-width: 30ch; }
 .site-footer__heading { font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--sand); margin-bottom: 1rem; }
-.site-footer__col ul { display: flex; flex-direction: column; gap: 0.65rem; align-items: center; }
+.site-footer__col ul { display: flex; flex-direction: column; gap: 0.65rem; align-items: flex-start; }
 .site-footer__col a { color: var(--on-dark-muted); transition: color var(--dur-fast) var(--ease-out); }
 .site-footer__col a:hover { color: var(--milk); }
-.site-footer__contacts a { display: inline-flex; align-items: center; gap: 0.5rem; }
-.site-footer__bottom { display: flex; align-items: center; justify-content: center; text-align: center; gap: 1rem; flex-wrap: wrap; padding-top: 1.5rem; color: var(--on-dark-muted); font-size: 0.85rem; }
-@media (max-width: 991px) { .site-footer__top { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 560px) { .site-footer__top { grid-template-columns: 1fr; } }
+.site-footer__contacts { display: flex; flex-direction: column; gap: 0.55rem; }
+.site-footer__contacts a { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--on-dark-muted); transition: color var(--dur-fast) var(--ease-out); }
+.site-footer__contacts a:hover { color: var(--milk); }
+.site-footer__socials { display: flex; gap: 0.6rem; }
+.site-footer__socials a { display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px; border-radius: 999px; border: 1px solid rgba(246,242,234,0.2); color: var(--milk); transition: background var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out); }
+.site-footer__socials a:hover { background: var(--forest); border-color: var(--forest); transform: translateY(-2px); }
+
+/* ---- Charity fund card ---- */
+.site-footer__fund { position: relative; display: flex; flex-direction: column; gap: clamp(1.25rem, 2vw, 1.75rem); padding: clamp(1.3rem, 2vw, 1.9rem); background: rgba(246,242,234,0.04); border: 1px solid rgba(246,242,234,0.09); border-radius: 24px; }
+.fund__heart { position: absolute; top: clamp(1.3rem, 2vw, 1.9rem); right: clamp(1.3rem, 2vw, 1.9rem); color: var(--lime); }
+.fund__photos { display: flex; justify-content: flex-start; padding-left: 0.5rem; min-height: 132px; }
+.fund__photo { width: 116px; height: 132px; border-radius: 12px; border: 5px solid var(--paper); background: linear-gradient(135deg, #d8cfc0, #b9ad9a); box-shadow: var(--shadow-card); flex: none; }
+.fund__photo--a { transform: rotate(-7deg); }
+.fund__photo--b { transform: rotate(2deg) translateY(-6px); margin-inline: -22px; z-index: 2; }
+.fund__photo--c { transform: rotate(8deg); }
+.fund__body { display: grid; grid-template-columns: 1fr auto; gap: clamp(1rem, 2vw, 2rem); align-items: end; }
+.fund__eyebrow { display: block; color: var(--lime); font-weight: var(--fw-semibold); font-size: 0.9rem; margin-bottom: 0.6rem; }
+.fund__title { font-family: var(--font-display); font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2rem); line-height: 1.05; letter-spacing: -0.01em; color: var(--milk); margin-bottom: 0.8rem; }
+.fund__text { color: var(--on-dark-muted); font-size: 0.92rem; max-width: 30ch; }
+.fund__aside { display: flex; flex-direction: column; align-items: center; gap: 0.7rem; }
+.fund__qr { width: clamp(104px, 9vw, 128px); aspect-ratio: 1; padding: 8px; background: #fff; border-radius: 12px; }
+.fund__qr svg { display: block; border-radius: 4px; }
+.fund__cta { color: var(--lime); font-weight: var(--fw-medium); font-size: 0.9rem; text-decoration: underline; text-underline-offset: 3px; transition: opacity var(--dur-fast) var(--ease-out); }
+.fund__cta:hover { opacity: 0.75; }
+
+.site-footer__bottom { display: flex; align-items: center; justify-content: space-between; text-align: left; gap: 1rem; flex-wrap: wrap; padding-top: 1.5rem; color: var(--on-dark-muted); font-size: 0.85rem; }
+.site-footer__ask { display: inline-flex; align-items: center; gap: 0.75rem; padding: 0.55rem 0.6rem 0.55rem 1.35rem; background: var(--forest); color: var(--white); border-radius: 999px; font-weight: var(--fw-medium); font-size: 0.95rem; transition: background var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out); }
+.site-footer__ask:hover { background: var(--forest-deep); transform: translateY(-2px); }
+.site-footer__ask-go { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 999px; background: var(--lime); color: var(--ink); transition: transform var(--dur-fast) var(--ease-out); }
+.site-footer__ask:hover .site-footer__ask-go { transform: rotate(45deg); }
+
+@media (max-width: 991px) {
+  .site-footer__top { grid-template-columns: 1fr 1fr; }
+  .site-footer__fund { grid-column: 1 / -1; }
+}
+@media (max-width: 560px) {
+  .site-footer__top { grid-template-columns: 1fr; }
+  .fund__body { grid-template-columns: 1fr; align-items: start; }
+  .fund__aside { flex-direction: row; align-items: center; justify-content: space-between; }
+  .site-footer__bottom { justify-content: flex-start; }
+  .site-footer__ask { width: 100%; justify-content: space-between; }
+}
 
 /* ---- Sticky CTA (mobile) ---- */
 .sticky-cta {
