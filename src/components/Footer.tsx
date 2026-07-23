@@ -13,7 +13,6 @@ import {
   Phone,
   Mail,
   Heart,
-  ArrowUpRight,
 } from "@/components/Icons";
 
 export function Footer({ locale }: { locale: Locale }) {
@@ -132,17 +131,6 @@ export function Footer({ locale }: { locale: Locale }) {
 
         <div className="site-footer__bottom">
           <p>© {year} {siteConfig.brand}. {t.rights}</p>
-          <a
-            href={siteConfig.telegram}
-            className="site-footer__ask"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span>{t.ask}</span>
-            <span className="site-footer__ask-go" aria-hidden="true">
-              <ArrowUpRight width={18} height={18} />
-            </span>
-          </a>
         </div>
       </div>
     </footer>
