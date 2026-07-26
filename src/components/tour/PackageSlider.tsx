@@ -3,22 +3,29 @@
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { usePrefersReducedMotion } from "@/lib/hooks";
+import { Lightbox, type LightboxLabels } from "./Lightbox";
 
 /**
  * Package image slider (Tripvana "package-slider"): a peek carousel of
  * fixed-width slides that bleeds off the right edge, advancing one slide at a
  * time. Circular arrows sit above the slider on the right. Autoplay pauses on
  * hover/focus and is disabled under prefers-reduced-motion.
+ *
+ * Clicking (or keyboard-activating) a slide opens the full-screen Lightbox at
+ * that image.
  */
 export function PackageSlider({
   images,
   alt,
+  labels,
 }: {
   images: string[];
   alt: string;
+  labels: LightboxLabels & { open: string };
 }) {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [lightbox, setLightbox] = useState<number | null>(null);
   const reduce = usePrefersReducedMotion();
   const count = images.length;
 
@@ -29,20 +36,24 @@ export function PackageSlider({
 
   const timer = useRef<ReturnType<typeof setInterval> | null>(null);
   useEffect(() => {
-    if (reduce || paused || count < 2) return;
+    if (reduce || paused || count < 2 || lightbox !== null) return;
     timer.current = setInterval(() => setIndex((p) => (p + 1) % count), 4500);
     return () => {
       if (timer.current) clearInterval(timer.current);
     };
-  }, [reduce, paused, count]);
+  }, [reduce, paused, count, lightbox]);
 
   // Touch / pointer swipe — drag the images sideways to change slide. The
   // transform track isn't natively scrollable, so we translate a horizontal
   // drag past a threshold into a prev/next step.
   const drag = useRef<{ x: number; y: number; active: boolean }>({ x: 0, y: 0, active: false });
+  // Set when a gesture turned out to be a swipe, so the trailing click on the
+  // slide doesn't also open the lightbox.
+  const swiped = useRef(false);
   const onPointerDown = (e: React.PointerEvent) => {
     if (count < 2 || e.pointerType === "mouse") return; // keep desktop on arrows
     drag.current = { x: e.clientX, y: e.clientY, active: true };
+    swiped.current = false;
     setPaused(true);
   };
   const onPointerEnd = (e: React.PointerEvent) => {
@@ -51,8 +62,20 @@ export function PackageSlider({
     const dx = e.clientX - drag.current.x;
     const dy = e.clientY - drag.current.y;
     // Ignore mostly-vertical gestures so page scroll still works.
-    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) go(index + (dx < 0 ? 1 : -1));
+    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) {
+      swiped.current = true;
+      go(index + (dx < 0 ? 1 : -1));
+    }
     setPaused(false);
+  };
+
+  const openLightbox = (i: number) => {
+    if (swiped.current) {
+      swiped.current = false;
+      return;
+    }
+    setIndex(i);
+    setLightbox(i);
   };
 
   return (
@@ -76,7 +99,14 @@ export function PackageSlider({
           style={{ ["--i" as string]: index }}
         >
           {images.map((src, i) => (
-            <div className="td-slide" key={src + i} aria-hidden={i !== index}>
+            <button
+              type="button"
+              className="td-slide"
+              key={src + i}
+              onClick={() => openLightbox(i)}
+              aria-label={`${labels.open} — ${i + 1}`}
+              tabIndex={i === index ? 0 : -1}
+            >
               <Image
                 src={src}
                 alt={`${alt} — ${i + 1}`}
@@ -86,7 +116,18 @@ export function PackageSlider({
                 className="td-slide__img"
                 sizes="(max-width: 767px) 82vw, 640px"
               />
-            </div>
+              <span className="td-slide__zoom" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none">
+                  <circle cx="11" cy="11" r="6.25" stroke="currentColor" strokeWidth="1.6" />
+                  <path
+                    d="M15.6 15.6 20 20M11 8.6v4.8M8.6 11h4.8"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </span>
+            </button>
           ))}
         </div>
       </div>
@@ -120,6 +161,20 @@ export function PackageSlider({
             </svg>
           </button>
         </>
+      )}
+
+      {lightbox !== null && (
+        <Lightbox
+          images={images}
+          alt={alt}
+          index={lightbox}
+          labels={labels}
+          onIndexChange={(n) => {
+            setLightbox(n);
+            setIndex(n);
+          }}
+          onClose={() => setLightbox(null)}
+        />
       )}
     </div>
   );

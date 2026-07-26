@@ -142,7 +142,11 @@ export default function TourPage({
           </ul>
 
           {/* Image slider */}
-          <PackageSlider images={tour.gallery} alt={loc(tour.name, locale)} />
+          <PackageSlider
+            images={tour.gallery}
+            alt={loc(tour.name, locale)}
+            labels={t.lightbox}
+          />
 
           {/* Two-column body: details + sticky booking form */}
           <div className="td-body">
