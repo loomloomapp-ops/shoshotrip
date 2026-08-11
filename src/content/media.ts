@@ -26,7 +26,11 @@ export const PORTRAIT = [
   "/media/ph5-p.jpg",
 ] as const;
 
-export const heroPoster = "/media/hero-banner.png";
+/** Hero background. Two crops of the same scene: the landscape frame is the
+ *  desktop/tablet default, the portrait one takes over on phones (<768px)
+ *  where a wide frame would be cropped down to a thin strip. */
+export const heroPoster = "/media/hero-banner.jpg";
+export const heroPosterPortrait = "/media/hero-banner-portrait.jpg";
 export const heroVideoMp4 = "/media/hero.mp4";
 export const heroVideoWebm = "/media/hero.webm";
 
@@ -35,15 +39,14 @@ export const heroVideoWebm = "/media/hero.webm";
 export const finalCtaVideoMp4 = "/media/final-cta.mp4";
 export const finalCtaPoster = "/media/hero-banner.png";
 
-export const founderPhotos = [
-  "/media/founder-viktor.webp",
-  "/media/founder-andriy.webp",
-] as const;
+/* Founder photos moved to `data/team.json` (photo + focus per person), so the
+   team block is no longer limited to a fixed pair. */
 export const whyMain = "/media/ph3-p.jpg";
 export const whyInset = "/media/ph2-l.jpg";
 
-/** Full-bleed scene behind the "Why ShoSho Trip" card deck. */
-export const whyScene = "/media/why-scene.png";
+/** Full-bleed scene behind the "Why ShoSho Trip" card deck. Owner photo, shot
+ *  portrait — the stage crops it, see .why-stage__img object-position. */
+export const whyScene = "/media/why-scene.jpg";
 /** Full-bleed scene behind the tour-matcher quiz. */
 export const quizScene = "/media/quiz-scene.png";
 

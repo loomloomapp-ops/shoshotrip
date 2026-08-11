@@ -9,7 +9,7 @@ import { withBreaks } from "@/lib/text";
 import { getAllTours } from "@/content/tours";
 import { HeroTourSlider } from "@/components/HeroTourSlider";
 import { ArrowUpRight, Star } from "@/components/Icons";
-import { heroPoster, heroVideoMp4, heroVideoWebm } from "@/content/media";
+import { heroPoster, heroPosterPortrait, heroVideoMp4, heroVideoWebm } from "@/content/media";
 
 /**
  * Hero: full-bleed video/image background with a centered headline + single
@@ -20,6 +20,7 @@ import { heroPoster, heroVideoMp4, heroVideoWebm } from "@/content/media";
  * landscape poster (heroPoster) is used as the background.
  */
 const HERO_POSTER = heroPoster;
+const HERO_POSTER_PORTRAIT = heroPosterPortrait;
 const HERO_VIDEO_MP4 = heroVideoMp4;
 const HERO_VIDEO_WEBM = heroVideoWebm;
 
@@ -32,14 +33,27 @@ export function Hero({ locale }: { locale: Locale }) {
   return (
     <section className="hero" aria-label={dict.hero.title}>
       <div className="hero__bg">
+        {/* The photo is the base layer so the correct crop is picked by the
+            browser on first paint (a <video poster> can only carry one image).
+            The video, when present, simply covers it. */}
+        <picture>
+          <source media="(max-width: 767px)" srcSet={HERO_POSTER_PORTRAIT} />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            className="hero__media"
+            src={HERO_POSTER}
+            alt=""
+            aria-hidden="true"
+            fetchPriority="high"
+          />
+        </picture>
         {videoOk ? (
           <video
-            className="hero__media"
+            className="hero__media hero__media--video"
             autoPlay
             muted
             loop
             playsInline
-            poster={HERO_POSTER}
             preload="none"
             onError={() => setVideoOk(false)}
             aria-hidden="true"
@@ -47,16 +61,12 @@ export function Hero({ locale }: { locale: Locale }) {
             <source src={HERO_VIDEO_WEBM} type="video/webm" />
             <source src={HERO_VIDEO_MP4} type="video/mp4" />
           </video>
-        ) : (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img className="hero__media" src={HERO_POSTER} alt="" aria-hidden="true" />
-        )}
+        ) : null}
         <div className="hero__scrim" />
       </div>
 
       <div className="container hero__top on-dark">
         <h1 className="hero__title">{withBreaks(dict.hero.title)}</h1>
-        <p className="hero__subtitle">{withBreaks(dict.hero.subtitle)}</p>
         <div className="hero__actions">
           <Link href={toursHref} className="cta cta--lg" aria-label={dict.hero.cta}>
             <span className="cta__label">{dict.hero.cta}</span>

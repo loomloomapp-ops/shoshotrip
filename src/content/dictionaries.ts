@@ -138,16 +138,8 @@ export const dictionaries = {
       eyebrow: "Хто їде з вами",
       title: "Віктор і Андрій",
       text: "Віктор і Андрій — два мандрівники, закохані у справжні пригоди. \nМи створюємо дійсно авторські тури для тих, хто хоче побачити світ за межами звичних туристичних маршрутів",
-      viktor: {
-        name: "Віктор",
-        role: "Співзасновник • Автор маршрутів",
-        bio: "Знає десятки місць, яких немає у туристичних путівниках.",
-      },
-      andriy: {
-        name: "Андрій",
-        role: "Співзасновник • Супровід груп",
-        bio: "Тримає ритм групи так, щоб у дорозі було легко й цікаво кожному.",
-      },
+      more: "Читати історію",
+      less: "Згорнути",
     },
     quiz: {
       eyebrow: "Тест на підбір туру",
@@ -290,6 +282,13 @@ export const dictionaries = {
       itineraryNote:
         "Програма може коригуватися залежно від погоди, стану маршрутів і локальних умов.",
       day: "День",
+      /** Labels inside an expanded itinerary day. */
+      dayRoute: "Маршрут",
+      dayTransfer: "Дорога",
+      dayLoad: "Навантаження",
+      dayMeals: "Харчування",
+      dayStay: "Ночівля",
+      dayOpen: "Показати деталі дня",
       difficulty: "Фізична підготовка",
       difficultyLevels: ["Легкий", "Помірний", "Активний", "Складний"],
       distance: "Кілометраж",
@@ -480,16 +479,8 @@ export const dictionaries = {
       eyebrow: "Who travels with you",
       title: "Viktor & Andrii",
       text: "Viktor and Andrii are two travellers in love with real adventure. \nWe create genuinely author-led tours for people who want to see the world beyond the usual tourist routes",
-      viktor: {
-        name: "Viktor",
-        role: "Co-founder • Route author",
-        bio: "Knows dozens of places you will not find in any travel guide.",
-      },
-      andriy: {
-        name: "Andrii",
-        role: "Co-founder • Group guide",
-        bio: "Keeps the group's rhythm so the road feels easy for everyone.",
-      },
+      more: "Read the story",
+      less: "Show less",
     },
     quiz: {
       eyebrow: "Trip matcher",
@@ -627,6 +618,13 @@ export const dictionaries = {
       itineraryNote:
         "The program may be adjusted depending on weather, trail conditions and local circumstances.",
       day: "Day",
+      /** Labels inside an expanded itinerary day. */
+      dayRoute: "Route",
+      dayTransfer: "Travel",
+      dayLoad: "Effort",
+      dayMeals: "Meals",
+      dayStay: "Overnight",
+      dayOpen: "Show day details",
       difficulty: "Fitness level",
       difficultyLevels: ["Easy", "Moderate", "Active", "Hard"],
       distance: "Distance",

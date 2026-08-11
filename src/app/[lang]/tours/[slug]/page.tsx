@@ -9,6 +9,7 @@ import { getReviewsByIds, getReviewText } from "@/content/reviews";
 import { siteConfig } from "@/content/config";
 import { LeadForm } from "@/components/LeadForm";
 import { PackageSlider } from "@/components/tour/PackageSlider";
+import { ItineraryAccordion } from "@/components/tour/ItineraryAccordion";
 import { FAQ } from "@/components/FAQ";
 import {
   ArrowLeft,
@@ -160,19 +161,11 @@ export default function TourPage({
               {/* Plan chart */}
               <div className="td-block">
                 <h3 className="td-block__title td-block__title--sm">{t.itinerary}</h3>
-                <ul className="td-plan">
-                  {tour.itinerary.map((day, i) => (
-                    <li key={i} className="td-plan__row">
-                      <span className="td-plan__day">
-                        {t.day} {i + 1}
-                      </span>
-                      <span className="td-plan__text">
-                        {loc(day.title, locale)}
-                        <span className="td-plan__route"> — {loc(day.route, locale)}</span>
-                      </span>
-                    </li>
-                  ))}
-                </ul>
+                <ItineraryAccordion
+                  days={tour.itinerary}
+                  gallery={tour.gallery}
+                  locale={locale}
+                />
                 <p className="td-plan__note">{t.itineraryNote}</p>
               </div>
 

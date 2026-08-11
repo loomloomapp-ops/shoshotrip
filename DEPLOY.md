@@ -50,6 +50,20 @@ The lead form POSTs to `/lead.php`. To receive submissions:
 `lead.config.php` is gitignored and denied by `.htaccess`. If nothing is
 configured, leads are appended to `public_html/leads.log` so none are lost.
 
+## 4. Content panel (`/admin`)
+
+Tours, team members and reviews are edited at `https://yourdomain/admin` — see
+**[ADMIN.md](ADMIN.md)** for the one-time setup and the day-to-day guide.
+
+The content itself lives as JSON in the repository
+(`src/content/data/tours.json`, `team.json`, `reviews.json`), so there is no
+database. Saving from the panel commits to GitHub, and the workflow in
+`.github/workflows/deploy.yml` rebuilds and re-uploads the site over FTP.
+
+Once those FTP secrets are configured, steps 1 and 2 above happen
+automatically on every push — manual upload is only needed for the very first
+deploy or if you prefer to stay hands-on.
+
 ## Notes
 
 - **URLs:** Ukrainian lives at `/ua/…`, English at `/en/…`; `/` redirects to the
@@ -57,6 +71,7 @@ configured, leads are appended to `public_html/leads.log` so none are lost.
 - **`.htaccess`** needs Apache/LiteSpeed with mod_rewrite — the Hostinger
   default. It sets the 404 page, long-caches build assets, and blocks access to
   `lead.config.php` / `leads.log`.
-- After content or code changes: re-run `npm run build` and re-upload `out/`.
+- After code changes: re-run `npm run build` and re-upload `out/` (or let the
+  GitHub Actions workflow do it). Content changes go through `/admin`.
 - Analytics / site URL: set `NEXT_PUBLIC_*` values in `.env.local` before
   building (see `.env.example`).

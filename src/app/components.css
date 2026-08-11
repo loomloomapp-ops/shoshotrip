@@ -221,7 +221,11 @@
   overflow: hidden;
 }
 .hero__bg { position: absolute; inset: 0; z-index: 0; }
-.hero__media { width: 100%; height: 100%; object-fit: cover; }
+/* <picture> is inline by default, which would collapse the img's height:100%. */
+.hero__bg picture { display: block; width: 100%; height: 100%; }
+.hero__media { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+/* The video sits over the photo layer rather than replacing it. */
+.hero__media--video { position: absolute; inset: 0; }
 .hero__scrim {
   position: absolute;
   inset: 0;
@@ -453,7 +457,8 @@
     min-height: 100dvh;
     display: flex;
     flex-direction: column;
-    padding-bottom: clamp(1.5rem, 4vh, 2.4rem);
+    /* +20px lifts the tours row off the bottom edge (owner request). */
+    padding-bottom: calc(clamp(1.5rem, 4vh, 2.4rem) + 20px);
   }
   .hero__top { padding-top: calc(var(--header-h) + 2.4rem); gap: 1.1rem; }
   /* Tours sit at the bottom of the first screen (see mobile screenshot).
@@ -610,6 +615,10 @@
   transition: transform 0.8s var(--ease-out);
 }
 .emotions-card:hover .emotions-card__img { transform: scale(1.04); }
+/* Poster layer sits under its video (see EmotionsRail) and never animates on
+   its own, so it stays pixel-aligned with the frame playing over it. */
+.emotions-card__poster { z-index: 0; }
+.emotions-card__poster + video { z-index: 1; }
 
 /* Instagram plate (bottom-left, every card) */
 .emotions-card__ig {
@@ -827,7 +836,9 @@
   overflow: hidden;
   box-shadow: var(--shadow-card);
 }
-.why-stage__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+/* The scene photo is portrait; on a wide stage `cover` keeps a horizontal band.
+   Anchor it low so the peak and the van stay in frame instead of empty sky. */
+.why-stage__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 72%; }
 .why-stage__scrim {
   position: absolute;
   inset: 0;
@@ -1000,6 +1011,54 @@ section.founders { background: #FAEFE3; }
 .founder-card__name { font-size: clamp(1.3rem, 2vw, 1.6rem); font-weight: var(--fw-semibold); color: var(--ink); line-height: 1.05; }
 .founder-card__role { font-size: 0.9rem; font-weight: var(--fw-medium); color: var(--forest); }
 .founder-card__bio { margin: 0; font-size: 0.92rem; line-height: 1.5; color: var(--text-muted); max-width: none; }
+
+/* Long-form founder story: collapsed by default so one long bio does not
+   unbalance the two-column grid. */
+.founder-story { margin-top: 0.15rem; }
+.founder-story__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font-size: 0.88rem;
+  font-weight: var(--fw-medium);
+  color: var(--forest);
+  border-bottom: 1px solid currentColor;
+  line-height: 1.4;
+  transition: color 0.3s var(--ease-out);
+}
+.founder-story__toggle:hover { color: var(--forest-deep); }
+.founder-story__chevron { transition: transform 0.3s var(--ease-out); }
+.founder-story__toggle[aria-expanded="true"] .founder-story__chevron { transform: rotate(180deg); }
+
+.founder-story__body {
+  margin-top: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  animation: founder-story-in 0.4s var(--ease-out) both;
+}
+/* An author `display` declaration outranks the UA rule for [hidden], so the
+   collapsed state has to be restated here or the story never hides. */
+.founder-story__body[hidden] { display: none; }
+.founder-story__p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  max-width: 62ch;
+}
+@keyframes founder-story-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .founder-story__body { animation: none; }
+  .founder-story__chevron { transition: none; }
+}
 
 .founder-card__ig {
   flex: none;
@@ -1846,6 +1905,83 @@ section.founders { background: #FAEFE3; }
 }
 .td-plan__text { color: var(--text); }
 .td-plan__route { color: var(--text-muted); }
+/* ---- Itinerary as an accordion (ItineraryAccordion) ----
+   Collapsed rows keep the old plan-chart rhythm (day marker + title + route);
+   opening one reveals a photo and the day's facts. Same grid-template-rows
+   transition as the FAQ so both accordions on the page feel identical. */
+.td-days { display: flex; flex-direction: column; }
+.td-day { border-bottom: 1px solid var(--border); }
+.td-day__head { margin: 0; font-size: inherit; font-weight: inherit; }
+.td-day__trigger {
+  width: 100%;
+  display: flex;
+  gap: 0.9rem;
+  align-items: baseline;
+  padding: 0.9rem 0;
+  text-align: left;
+  color: inherit;
+}
+.td-day:first-child .td-day__trigger { padding-top: 0; }
+.td-day__n {
+  flex: none;
+  min-width: 74px;
+  font-weight: var(--fw-semibold);
+  color: var(--forest);
+}
+.td-day__text { flex: 1; color: var(--text); }
+.td-day__route { color: var(--text-muted); }
+.td-day__icon {
+  flex: none;
+  align-self: center;
+  width: 30px; height: 30px; border-radius: 50%;
+  border: 1px solid var(--border-strong);
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: all var(--dur-fast) var(--ease-out);
+}
+.td-day__trigger[aria-expanded="true"] .td-day__icon {
+  background: var(--forest); color: var(--white); border-color: var(--forest);
+}
+/* Route is already visible in the open panel's fact list — drop the duplicate. */
+.td-day.is-open .td-day__route { display: none; }
+
+.td-day__panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.45s var(--ease-out); }
+.td-day__panel.is-open { grid-template-rows: 1fr; }
+.td-day__panel-inner {
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 1.25rem;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity 0.4s var(--ease-out), transform 0.4s var(--ease-out);
+}
+.td-day__panel.is-open .td-day__panel-inner { opacity: 1; transform: none; padding-bottom: 1.3rem; }
+.td-day__media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--forest-soft);
+}
+.td-day__img { object-fit: cover; }
+.td-day__body { display: flex; flex-direction: column; gap: 0.9rem; min-width: 0; }
+.td-day__desc { color: var(--text); max-width: 60ch; }
+.td-day__note { color: var(--text-muted); font-size: 0.9rem; max-width: 60ch; }
+.td-day__facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.55rem 1.25rem; }
+.td-day__fact { display: flex; flex-direction: column; gap: 0.1rem; min-width: 0; }
+.td-day__fact dt { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); }
+.td-day__fact dd { margin: 0; color: var(--text); font-size: 0.95rem; }
+/* Route is the longest value — let it span the full width of the fact grid. */
+.td-day__fact:first-child { grid-column: 1 / -1; }
+
+@media (max-width: 767px) {
+  .td-day__panel-inner { grid-template-columns: 1fr; gap: 1rem; }
+  .td-day__media { aspect-ratio: 16 / 10; }
+  .td-day__facts { grid-template-columns: 1fr; }
+  .td-day__fact:first-child { grid-column: auto; }
+  .td-day__n { min-width: 62px; }
+}
+
 .td-plan__note {
   margin-top: 1.1rem;
   padding: 0.9rem 1.1rem;

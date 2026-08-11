@@ -1,0 +1,166 @@
+[
+  {
+    "id": "r1",
+    "demo": true,
+    "kind": "text",
+    "name": "Марта Козак",
+    "photo": "https://picsum.photos/seed/review-marta/200/200",
+    "tour": {
+      "ua": "Карпати: світанки на хребті",
+      "en": "Carpathians: sunrises on the ridge"
+    },
+    "instagram": "https://instagram.com/",
+    "text": {
+      "ua": "Я думала, що знаю Карпати. Виявилося, ні. Світанок на Говерлі, коли під тобою хмари, — це те, що я тепер згадую в найсіріші робочі дні.",
+      "en": "I thought I knew the Carpathians. Turns out I didn’t. The sunrise on Hoverla with clouds beneath you is what I now remember on the greyest workdays."
+    }
+  },
+  {
+    "id": "r5",
+    "demo": true,
+    "kind": "video",
+    "name": "Соломія Верес",
+    "photo": "https://picsum.photos/seed/review-solomia/200/200",
+    "tour": {
+      "ua": "Грузія: Сванетія без асфальту",
+      "en": "Georgia: Svaneti off the asphalt"
+    },
+    "date": "12.03.2026",
+    "instagram": "https://instagram.com/",
+    "poster": "/media/ph3-p.jpg",
+    "text": {
+      "ua": "Записала коротке відео просто з перевалу — слова тут зайві.",
+      "en": "I filmed a short clip right from the pass — words are redundant here."
+    }
+  },
+  {
+    "id": "r2",
+    "demo": true,
+    "kind": "text",
+    "name": "Олег Данилюк",
+    "photo": "https://picsum.photos/seed/review-oleh/200/200",
+    "tour": {
+      "ua": "Грузія: Сванетія без асфальту",
+      "en": "Georgia: Svaneti off the asphalt"
+    },
+    "text": {
+      "ua": "Хлопці зробили те, чого не робить жодне турагентство: познайомили нас із реальними людьми. Вечеря в родині сванів була кращою за будь-який ресторан.",
+      "en": "The guys did what no travel agency does: they introduced us to real people. Dinner with a Svan family beat any restaurant."
+    }
+  },
+  {
+    "id": "r6",
+    "demo": true,
+    "kind": "screenshot",
+    "name": "Христина Мельник",
+    "photo": "https://picsum.photos/seed/review-khrystyna/200/200",
+    "tour": {
+      "ua": "Марокко: від Атласу до дюн",
+      "en": "Morocco: from the Atlas to the dunes"
+    },
+    "text": {
+      "ua": "Щойно повернулась і одразу пишу: це були найкращі 8 днів року. Дякую, що витягли мене з зони комфорту!",
+      "en": "Just got back and writing right away: the best 8 days of the year. Thanks for pulling me out of my comfort zone!"
+    }
+  },
+  {
+    "id": "r3",
+    "demo": true,
+    "kind": "text",
+    "name": "Ірина Гнатюк",
+    "photo": "https://picsum.photos/seed/review-iryna/200/200",
+    "tour": {
+      "ua": "Карпати: світанки на хребті",
+      "en": "Carpathians: sunrises on the ridge"
+    },
+    "instagram": "https://instagram.com/",
+    "text": {
+      "ua": "Було складно. І саме тому це найкраща моя подорож. Повернулася додому іншою людиною — не пафос, а факт.",
+      "en": "It was hard. And that’s exactly why it’s my best trip. I came home a different person — not a slogan, a fact."
+    }
+  },
+  {
+    "id": "r7",
+    "demo": true,
+    "kind": "photo",
+    "name": "Назар Ткачук",
+    "photo": "/media/ph1-p.jpg",
+    "tour": {
+      "ua": "Карпати: світанки на хребті",
+      "en": "Carpathians: sunrises on the ridge"
+    },
+    "instagram": "https://instagram.com/",
+    "text": {
+      "ua": "Той самий кадр із хребта, який тепер на заставці телефону.",
+      "en": "That shot from the ridge — now my phone wallpaper."
+    }
+  },
+  {
+    "id": "r4",
+    "demo": true,
+    "kind": "text",
+    "name": "Дмитро Савчук",
+    "photo": "https://picsum.photos/seed/review-dmytro/200/200",
+    "tour": {
+      "ua": "Марокко: від Атласу до дюн",
+      "en": "Morocco: from the Atlas to the dunes"
+    },
+    "text": {
+      "ua": "Ніч у пустелі й тиша, якої я не чув ніколи. Група була невелика, і за тиждень ми стали справжніми друзями.",
+      "en": "A night in the desert and a silence I’d never heard. The group was small, and in a week we became real friends."
+    }
+  },
+  {
+    "id": "r8",
+    "demo": true,
+    "kind": "video",
+    "name": "Юлія Комар",
+    "photo": "https://picsum.photos/seed/review-yulia/200/200",
+    "tour": {
+      "ua": "Карпати: світанки на хребті",
+      "en": "Carpathians: sunrises on the ridge"
+    },
+    "date": "28.02.2026",
+    "instagram": "https://instagram.com/",
+    "poster": "/media/ph1-p.jpg",
+    "text": {
+      "ua": "Знімала на телефон — і навіть так видно, наскільки там красиво.",
+      "en": "Filmed it on my phone, and even so you can see how beautiful it is."
+    }
+  },
+  {
+    "id": "r9",
+    "demo": true,
+    "kind": "video",
+    "name": "Богдан Гринько",
+    "photo": "https://picsum.photos/seed/review-bohdan/200/200",
+    "tour": {
+      "ua": "Марокко: від Атласу до дюн",
+      "en": "Morocco: from the Atlas to the dunes"
+    },
+    "date": "05.05.2026",
+    "poster": "/media/ph4-p.jpg",
+    "text": {
+      "ua": "Коротке відео з дюн на заході сонця. Мурашки досі.",
+      "en": "A short clip from the dunes at sunset. Still gives me chills."
+    }
+  },
+  {
+    "id": "r10",
+    "demo": true,
+    "kind": "video",
+    "name": "Аліна Дорош",
+    "photo": "https://picsum.photos/seed/review-alina/200/200",
+    "tour": {
+      "ua": "Грузія: Сванетія без асфальту",
+      "en": "Georgia: Svaneti off the asphalt"
+    },
+    "date": "19.04.2026",
+    "instagram": "https://instagram.com/",
+    "poster": "/media/ph2-p.jpg",
+    "text": {
+      "ua": "Записала перші враження одразу після спуску — емоції зашкалюють.",
+      "en": "Recorded my first impressions right after the descent — emotions off the charts."
+    }
+  }
+]

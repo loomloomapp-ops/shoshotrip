@@ -1,5 +1,4 @@
 import { siteConfig } from "@/content/config";
-import { LANDSCAPE, PORTRAIT } from "@/content/media";
 
 /**
  * Emotions gallery — single source of truth.
@@ -32,66 +31,71 @@ export type GalleryItem =
     };
 
 /**
- * Approx. reference composition: narrow photo -> vertical photo -> vertical
- * photo -> large video -> photo -> large video (+ a couple more so the rail has
- * scroll room and edges always peek the next card).
+ * The rail strictly alternates photo -> video -> photo -> video (owner request),
+ * so the eye never meets two clips or two stills in a row.
  *
- * VIDEO FILES: the two `video` entries use real web-optimized clips generated
- * from the owner's originals (assets/IMG_4627.MOV, assets/IMG_5590.MOV):
- *   - /media/emotions/clip-1.mp4, clip-2.mp4  (H.264 720p, faststart)
- *   - /media/emotions/clip-1-poster.jpg, clip-2-poster.jpg
- * The originals stay untouched in assets/. `srcWebm` is optional — add a VP9
- * .webm here to shave bytes in Chrome/Firefox if you ever transcode one.
+ * All eight files are web-optimized derivatives of the owner's originals, which
+ * stay untouched in asets/:
+ *   photo-1..4.jpg  <- IMG_6956 / IMG_6955 / IMG_6957 / IMG_6958
+ *   clip-1..4.mp4   <- IMG_6959 / IMG_6960 / IMG_6961 / IMG_6962
+ *                      (H.264 720p, 30fps, no audio track, faststart)
+ *   clip-1..4-poster.jpg — first frame of each clip, so there is no layout shift
+ * `srcWebm` is optional — add a VP9 .webm here to shave bytes in Chrome/Firefox.
+ *
+ * Card width follows the source aspect: portrait media reads as `small`, the
+ * portrait aerial clip as `medium`, landscape clips as `large`.
  */
 export const galleryItems: GalleryItem[] = [
   {
     type: "image",
-    src: PORTRAIT[0],
-    alt: "Учасники авторського туру ShoSho Trip на гірській стежці",
-    size: "small",
-  },
-  {
-    type: "image",
-    src: PORTRAIT[1],
-    alt: "Світанок у горах під час подорожі ShoSho Trip",
-    size: "small",
-  },
-  {
-    type: "image",
-    src: PORTRAIT[3],
-    alt: "Мандрівники ShoSho Trip милуються краєвидом",
+    src: "/media/emotions/photo-1.jpg",
+    alt: "Мандрівники ShoSho Trip біля льодовика Періто-Морено",
     size: "small",
   },
   {
     type: "video",
-    src: "/media/emotions/clip-1.mp4", // з IMG_4627.MOV (H.264, faststart)
+    src: "/media/emotions/clip-1.mp4",
     poster: "/media/emotions/clip-1-poster.jpg",
-    alt: "Емоції з авторського туру ShoSho Trip",
+    alt: "Учасники туру танцюють на дорозі під горою Фіцрой",
     size: "large",
   },
   {
     type: "image",
-    src: LANDSCAPE[4],
-    alt: "Гірський краєвид на маршруті ShoSho Trip",
-    size: "medium",
-  },
-  {
-    type: "video",
-    src: "/media/emotions/clip-2.mp4", // з IMG_5590.MOV (H.264, faststart)
-    poster: "/media/emotions/clip-2-poster.jpg",
-    alt: "Моменти з подорожі ShoSho Trip",
-    size: "large",
-  },
-  {
-    type: "image",
-    src: PORTRAIT[4],
-    alt: "Портрет учасниці подорожі ShoSho Trip на тлі гір",
+    src: "/media/emotions/photo-2.jpg",
+    alt: "Пілот запускає дрон на тлі гори Фіцрой",
     size: "small",
   },
   {
-    type: "image",
-    src: LANDSCAPE[0],
-    alt: "Панорама з маршруту авторського туру ShoSho Trip",
+    type: "video",
+    src: "/media/emotions/clip-2.mp4",
+    poster: "/media/emotions/clip-2-poster.jpg",
+    alt: "Політ над зеленою скелею та океаном",
     size: "medium",
+  },
+  {
+    type: "image",
+    src: "/media/emotions/photo-3.jpg",
+    alt: "Учасники туру ShoSho Trip у рятувальних жилетах перед виходом у море",
+    size: "small",
+  },
+  {
+    type: "video",
+    src: "/media/emotions/clip-3.mp4",
+    poster: "/media/emotions/clip-3-poster.jpg",
+    alt: "Автомобіль на порожній дорозі серед пустельного плато",
+    size: "large",
+  },
+  {
+    type: "image",
+    src: "/media/emotions/photo-4.jpg",
+    alt: "Рюкзак із нашивками країн на скелі біля льодовика",
+    size: "small",
+  },
+  {
+    type: "video",
+    src: "/media/emotions/clip-4.mp4",
+    poster: "/media/emotions/clip-4-poster.jpg",
+    alt: "Капсульний готель у горах на маршруті ShoSho Trip",
+    size: "large",
   },
 ];

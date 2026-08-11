@@ -14,8 +14,10 @@ next-env.d.ts
 tsconfig.tsbuildinfo
 
 # Local reference-only material (photos, .MOV clips, exported Webflow template).
-# Not part of the deployable site — keep it out of the repo.
+# Not part of the deployable site — keep it out of the repo. Both spellings:
+# the working folder on disk is "asets", and it holds multi-GB camera originals.
 /assets
+/asets
 
 # Static-export lead secrets + runtime log (live only on the server)
 /public/lead.config.php

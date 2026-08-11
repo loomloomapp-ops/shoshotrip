@@ -115,9 +115,9 @@ export function WhyUs({ locale }: { locale: Locale }) {
     <div className="why-stage">
       <Image
         src={whyScene}
-        alt="Світанок у горах під час подорожі ShoSho Trip"
-        width={1512}
-        height={1008}
+        alt="Мікроавтобус ShoSho Trip під зоряним небом у горах"
+        width={1200}
+        height={1600}
         sizes="(max-width: 991px) 100vw, 92vw"
         className="why-stage__img"
         priority={false}

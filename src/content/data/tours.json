@@ -1,0 +1,1352 @@
+[
+  {
+    "id": "carpathians-sunrise",
+    "slug": "carpathians-sunrise",
+    "demo": true,
+    "country": {
+      "ua": "Україна",
+      "en": "Ukraine"
+    },
+    "region": {
+      "ua": "Карпати, Чорногірський хребет",
+      "en": "Carpathians, Chornohora ridge"
+    },
+    "name": {
+      "ua": "Карпати: світанки на хребті",
+      "en": "Carpathians: sunrises on the ridge"
+    },
+    "datesLabel": {
+      "ua": "12–17 вересня 2026",
+      "en": "12–17 September 2026"
+    },
+    "startISO": "2026-09-12",
+    "durationDays": 6,
+    "price": 640,
+    "currency": "€",
+    "seatsLeft": 4,
+    "seatsTotal": 12,
+    "status": "available",
+    "difficulty": 3,
+    "activity": "trekking",
+    "groupSize": {
+      "ua": "8–12 людей",
+      "en": "8–12 people"
+    },
+    "highlight": {
+      "ua": "Три світанки над хмарами на найвищих вершинах Чорногори",
+      "en": "Three above-the-clouds sunrises on Chornohora’s highest peaks"
+    },
+    "shortDescription": {
+      "ua": "Шість днів на головному хребті українських Карпат: нічівлі в наметах і колибах, підйом на Говерлу до світанку, дикі полонини й вечори біля ватри.",
+      "en": "Six days on the main ridge of the Ukrainian Carpathians: nights in tents and shepherd huts, a pre-dawn climb up Hoverla, wild meadows and evenings by the fire."
+    },
+    "fullDescription": {
+      "ua": "Це маршрут для тих, хто хоче побачити Карпати не з оглядового майданчика, а зсередини. Ми пройдемо класичну лінію Чорногори, але зробимо це у своєму темпі: піднімемося на вершини до того, як туди дійдуть організовані групи, зустрінемо світанки над морем хмар і заночуємо там, звідки видно і зорі, і далекі вогні сіл. Дні активні, з перепадами висоти, зате нагорода — тиша й краєвиди, які неможливо передати фото.",
+      "en": "This route is for those who want to see the Carpathians from the inside, not from a viewing platform. We’ll walk the classic Chornohora line, but at our own pace: climbing the peaks before the organized groups arrive, meeting sunrises above a sea of clouds and sleeping where you can see both the stars and the distant village lights. The days are active with real elevation, but the reward is silence and views no photo can carry."
+    },
+    "highlights": [
+      {
+        "ua": "Зустрінемо світанок на Говерлі до туристичних груп",
+        "en": "Meet the sunrise on Hoverla before the crowds"
+      },
+      {
+        "ua": "Пройдемо нетуристичною стежкою через полонини",
+        "en": "Walk an off-tourist trail across wild meadows"
+      },
+      {
+        "ua": "Заночуємо в горах під зоряним небом",
+        "en": "Spend a night in the mountains under the stars"
+      },
+      {
+        "ua": "Спробуємо справжню гуцульську кухню в колибі",
+        "en": "Taste real Hutsul food in a shepherd’s hut"
+      },
+      {
+        "ua": "Побачимо озеро Несамовите на світанку",
+        "en": "See Nesamovyte lake at dawn"
+      }
+    ],
+    "itinerary": [
+      {
+        "title": {
+          "ua": "Збір і акліматизація",
+          "en": "Arrival and warm-up"
+        },
+        "route": {
+          "ua": "Яремче — Заросляк",
+          "en": "Yaremche — Zaroslyak"
+        },
+        "activities": {
+          "ua": "Знайомство групи, легкий вихід до водоспаду",
+          "en": "Group meet-up, easy hike to a waterfall"
+        },
+        "transferTime": {
+          "ua": "2 год трансфер, 2 год прогулянка",
+          "en": "2 h transfer, 2 h walk"
+        },
+        "load": {
+          "ua": "Легке",
+          "en": "Light"
+        },
+        "meals": {
+          "ua": "Вечеря",
+          "en": "Dinner"
+        },
+        "stay": {
+          "ua": "Гостьовий будинок",
+          "en": "Guesthouse"
+        }
+      },
+      {
+        "title": {
+          "ua": "Підйом на Говерлу",
+          "en": "Climbing Hoverla"
+        },
+        "route": {
+          "ua": "Заросляк — Говерла — Брескул",
+          "en": "Zaroslyak — Hoverla — Breskul"
+        },
+        "activities": {
+          "ua": "Сходження на найвищу вершину, вихід на хребет",
+          "en": "Summit of the highest peak, onto the ridge"
+        },
+        "transferTime": {
+          "ua": "7–8 год трекінгу",
+          "en": "7–8 h trekking"
+        },
+        "load": {
+          "ua": "Високе",
+          "en": "High"
+        },
+        "meals": {
+          "ua": "Сніданок, перекус",
+          "en": "Breakfast, trail snack"
+        },
+        "stay": {
+          "ua": "Намети на хребті",
+          "en": "Tents on the ridge"
+        },
+        "note": {
+          "ua": "Ранній підйом заради світанку",
+          "en": "Early start for the sunrise"
+        }
+      },
+      {
+        "title": {
+          "ua": "Хребет і озеро Несамовите",
+          "en": "The ridge and Nesamovyte lake"
+        },
+        "route": {
+          "ua": "Туркул — Несамовите — Пожижевська",
+          "en": "Turkul — Nesamovyte — Pozhyzhevska"
+        },
+        "activities": {
+          "ua": "Перехід хребтом, купання охочих в озері",
+          "en": "Ridge traverse, a swim for the brave"
+        },
+        "transferTime": {
+          "ua": "6 год трекінгу",
+          "en": "6 h trekking"
+        },
+        "load": {
+          "ua": "Помірне",
+          "en": "Moderate"
+        },
+        "meals": {
+          "ua": "Сніданок, вечеря",
+          "en": "Breakfast, dinner"
+        },
+        "stay": {
+          "ua": "Колиба",
+          "en": "Shepherd hut"
+        }
+      },
+      {
+        "title": {
+          "ua": "Полонини й локальна культура",
+          "en": "Meadows and local culture"
+        },
+        "route": {
+          "ua": "Пожижевська — полонина Гаджина",
+          "en": "Pozhyzhevska — Hadzhyna meadow"
+        },
+        "activities": {
+          "ua": "Знайомство з вівчарями, дегустація бринзи",
+          "en": "Meeting shepherds, tasting fresh cheese"
+        },
+        "transferTime": {
+          "ua": "4 год прогулянки",
+          "en": "4 h walking"
+        },
+        "load": {
+          "ua": "Легке",
+          "en": "Light"
+        },
+        "meals": {
+          "ua": "Сніданок, вечеря",
+          "en": "Breakfast, dinner"
+        },
+        "stay": {
+          "ua": "Колиба",
+          "en": "Shepherd hut"
+        }
+      },
+      {
+        "title": {
+          "ua": "Спуск і термальні джерела",
+          "en": "Descent and thermal springs"
+        },
+        "route": {
+          "ua": "Полонина — Яремче",
+          "en": "Meadow — Yaremche"
+        },
+        "activities": {
+          "ua": "Спуск у долину, відпочинок у термах",
+          "en": "Descent to the valley, rest at the springs"
+        },
+        "transferTime": {
+          "ua": "5 год спуску",
+          "en": "5 h descent"
+        },
+        "load": {
+          "ua": "Помірне",
+          "en": "Moderate"
+        },
+        "meals": {
+          "ua": "Сніданок",
+          "en": "Breakfast"
+        },
+        "stay": {
+          "ua": "Готель",
+          "en": "Hotel"
+        }
+      },
+      {
+        "title": {
+          "ua": "Прощальний ранок",
+          "en": "Farewell morning"
+        },
+        "route": {
+          "ua": "Яремче",
+          "en": "Yaremche"
+        },
+        "activities": {
+          "ua": "Вільний ранок, від’їзд",
+          "en": "Free morning, departure"
+        },
+        "transferTime": {
+          "ua": "—",
+          "en": "—"
+        },
+        "load": {
+          "ua": "Легке",
+          "en": "Light"
+        },
+        "meals": {
+          "ua": "Сніданок",
+          "en": "Breakfast"
+        },
+        "stay": {
+          "ua": "—",
+          "en": "—"
+        }
+      }
+    ],
+    "physical": {
+      "distanceKm": "≈ 62 km",
+      "elevation": {
+        "ua": "до +1400 м за день",
+        "en": "up to +1400 m per day"
+      },
+      "activityTime": {
+        "ua": "6–8 годин активності на день",
+        "en": "6–8 hours of activity per day"
+      },
+      "routeType": {
+        "ua": "Гірський трекінг з ночівлями",
+        "en": "Mountain trekking with overnights"
+      },
+      "experience": {
+        "ua": "Бажаний досвід багатоденних походів",
+        "en": "Multi-day hiking experience preferred"
+      }
+    },
+    "accommodation": {
+      "type": {
+        "ua": "Гостьові будинки, колиби, намети",
+        "en": "Guesthouses, shepherd huts, tents"
+      },
+      "occupancy": {
+        "ua": "2–4 людини",
+        "en": "2–4 people"
+      },
+      "bathroom": {
+        "ua": "Спільний на хребті, окремий у долині",
+        "en": "Shared on the ridge, private in the valley"
+      },
+      "single": {
+        "ua": "Можливе в долині за доплату",
+        "en": "Available in the valley for a surcharge"
+      },
+      "features": [
+        {
+          "ua": "Спальники видаємо за потреби",
+          "en": "Sleeping bags provided if needed"
+        },
+        {
+          "ua": "Гаряча вечеря щодня",
+          "en": "Hot dinner every day"
+        }
+      ]
+    },
+    "included": [
+      {
+        "ua": "Супровід Віктора й Андрія на всьому маршруті",
+        "en": "Guiding by Viktor and Andrii along the whole route"
+      },
+      {
+        "ua": "Проживання за програмою",
+        "en": "Accommodation per the program"
+      },
+      {
+        "ua": "Трансфери за маршрутом",
+        "en": "Transfers along the route"
+      },
+      {
+        "ua": "Груповий спорядження та аптечка",
+        "en": "Group gear and first-aid kit"
+      },
+      {
+        "ua": "Частина харчування (сніданки й вечері)",
+        "en": "Part of the meals (breakfasts and dinners)"
+      }
+    ],
+    "excluded": [
+      {
+        "ua": "Дорога до Яремче й назад",
+        "en": "Travel to Yaremche and back"
+      },
+      {
+        "ua": "Обіди й перекуси поза програмою",
+        "en": "Lunches and snacks outside the program"
+      },
+      {
+        "ua": "Особисте спорядження",
+        "en": "Personal gear"
+      },
+      {
+        "ua": "Страхування",
+        "en": "Insurance"
+      },
+      {
+        "ua": "Особисті витрати",
+        "en": "Personal expenses"
+      }
+    ],
+    "gallery": [
+      "/media/ph5-l.jpg",
+      "/media/ph1-p.jpg",
+      "/media/ph1-l.jpg",
+      "/media/ph2-p.jpg",
+      "/media/ph2-l.jpg",
+      "/media/ph3-p.jpg"
+    ],
+    "videos": [],
+    "reviewIds": [
+      "r1",
+      "r3"
+    ],
+    "faq": [
+      {
+        "q": {
+          "ua": "Де і коли зустрічаємося?",
+          "en": "Where and when do we meet?"
+        },
+        "a": {
+          "ua": "Точка зустрічі — Яремче, ранок першого дня. Точний час і локацію надсилаємо після бронювання.",
+          "en": "The meeting point is Yaremche, on the morning of day one. Exact time and location are sent after booking."
+        }
+      },
+      {
+        "q": {
+          "ua": "Наскільки складний маршрут?",
+          "en": "How hard is the route?"
+        },
+        "a": {
+          "ua": "Рівень 3 з 4. Потрібна впевнена фізична форма і бажано досвід багатоденних походів.",
+          "en": "Level 3 of 4. Solid fitness is required, and multi-day hiking experience is preferred."
+        }
+      },
+      {
+        "q": {
+          "ua": "Яка погода у вересні?",
+          "en": "What’s the weather like in September?"
+        },
+        "a": {
+          "ua": "Вдень +10…+18 °C, вночі в горах може бути близько 0 °C. Детальний список одягу надсилаємо заздалегідь.",
+          "en": "Daytime +10…+18 °C, nights in the mountains can drop near 0 °C. We send a detailed clothing list in advance."
+        }
+      }
+    ],
+    "seo": {
+      "title": {
+        "ua": "Тур у Карпати: світанки на хребті — ShoSho Trip",
+        "en": "Carpathians ridge trek: sunrises tour — ShoSho Trip"
+      },
+      "description": {
+        "ua": "6-денний авторський трекінг Чорногорою: Говерла на світанку, ночівлі в горах, полонини та гуцульська кухня.",
+        "en": "A 6-day author-led Chornohora trek: Hoverla at dawn, mountain overnights, wild meadows and Hutsul food."
+      }
+    }
+  },
+  {
+    "id": "georgia-svaneti",
+    "slug": "georgia-svaneti",
+    "demo": true,
+    "country": {
+      "ua": "Грузія",
+      "en": "Georgia"
+    },
+    "region": {
+      "ua": "Сванетія, Верхня Сванетія",
+      "en": "Svaneti, Upper Svaneti"
+    },
+    "name": {
+      "ua": "Грузія: Сванетія без асфальту",
+      "en": "Georgia: Svaneti off the asphalt"
+    },
+    "datesLabel": {
+      "ua": "3–11 жовтня 2026",
+      "en": "3–11 October 2026"
+    },
+    "startISO": "2026-10-03",
+    "durationDays": 9,
+    "price": 980,
+    "currency": "€",
+    "seatsLeft": 2,
+    "seatsTotal": 12,
+    "status": "last",
+    "difficulty": 3,
+    "activity": "balanced",
+    "groupSize": {
+      "ua": "10–14 людей",
+      "en": "10–14 people"
+    },
+    "highlight": {
+      "ua": "Середньовічні вежі Ушгулі, трекінг до льодовика і застілля з місцевими",
+      "en": "Ushguli’s medieval towers, a glacier trek and a feast with locals"
+    },
+    "shortDescription": {
+      "ua": "Дев’ять днів у краю кам’яних веж: трекінг між гірськими селами, найвище постійне поселення Європи, домашнє грузинське застілля й краєвиди Шхари.",
+      "en": "Nine days in the land of stone towers: trekking between mountain villages, Europe’s highest permanent settlement, a home Georgian feast and the views of Shkhara."
+    },
+    "fullDescription": {
+      "ua": "Сванетія — це інша Грузія: сувора, автентична й гостинна водночас. Ми пройдемо класичний трек Мествія — Ушгулі, але не поспішаючи, з ночівлями в родинних гостьових будинках, де вечеря перетворюється на справжнє застілля. Побачимо льодовик Шхари, середньовічні вежі, яким тисяча років, і навчимося трохи розуміти людей, для яких гори — це дім, а не маршрут.",
+      "en": "Svaneti is a different Georgia: severe, authentic and hospitable at once. We’ll walk the classic Mestia–Ushguli trek, but unhurried, with nights in family guesthouses where dinner becomes a real feast. We’ll see the Shkhara glacier, thousand-year-old medieval towers, and learn to understand a little the people for whom the mountains are home, not a route."
+    },
+    "highlights": [
+      {
+        "ua": "Дійдемо до найвищого села Європи — Ушгулі",
+        "en": "Reach Europe’s highest village — Ushguli"
+      },
+      {
+        "ua": "Трек до підніжжя льодовика Шхара",
+        "en": "Trek to the foot of the Shkhara glacier"
+      },
+      {
+        "ua": "Вечеря-застілля в родині сванів",
+        "en": "A feast dinner with a Svan family"
+      },
+      {
+        "ua": "Підйом до озер Корульді на світанку",
+        "en": "Sunrise climb to the Koruldi lakes"
+      },
+      {
+        "ua": "Дегустація домашнього вина й чачі",
+        "en": "Tasting home wine and chacha"
+      }
+    ],
+    "itinerary": [
+      {
+        "title": {
+          "ua": "Приліт і дорога в гори",
+          "en": "Arrival and the road to the mountains"
+        },
+        "route": {
+          "ua": "Кутаїсі — Местія",
+          "en": "Kutaisi — Mestia"
+        },
+        "activities": {
+          "ua": "Трансфер через перевали, вечеря знайомства",
+          "en": "Transfer over the passes, welcome dinner"
+        },
+        "transferTime": {
+          "ua": "5 год трансфер",
+          "en": "5 h transfer"
+        },
+        "load": {
+          "ua": "Легке",
+          "en": "Light"
+        },
+        "meals": {
+          "ua": "Вечеря",
+          "en": "Dinner"
+        },
+        "stay": {
+          "ua": "Гостьовий будинок",
+          "en": "Guesthouse"
+        }
+      },
+      {
+        "title": {
+          "ua": "Озера Корульді",
+          "en": "Koruldi lakes"
+        },
+        "route": {
+          "ua": "Местія — хрест — озера Корульді",
+          "en": "Mestia — the cross — Koruldi lakes"
+        },
+        "activities": {
+          "ua": "Акліматизаційний трек з панорамою Ушби",
+          "en": "Acclimatization trek with Ushba panorama"
+        },
+        "transferTime": {
+          "ua": "6 год трекінгу",
+          "en": "6 h trekking"
+        },
+        "load": {
+          "ua": "Помірне",
+          "en": "Moderate"
+        },
+        "meals": {
+          "ua": "Сніданок, вечеря",
+          "en": "Breakfast, dinner"
+        },
+        "stay": {
+          "ua": "Гостьовий будинок",
+          "en": "Guesthouse"
+        }
+      },
+      {
+        "title": {
+          "ua": "Перехід у Жабеші",
+          "en": "Crossing to Zhabeshi"
+        },
+        "route": {
+          "ua": "Местія — Жабеші",
+          "en": "Mestia — Zhabeshi"
+        },
+        "activities": {
+          "ua": "Перший день класичного треку",
+          "en": "First day of the classic trek"
+        },
+        "transferTime": {
+          "ua": "6–7 год трекінгу",
+          "en": "6–7 h trekking"
+        },
+        "load": {
+          "ua": "Помірне",
+          "en": "Moderate"
+        },
+        "meals": {
+          "ua": "Сніданок, вечеря",
+          "en": "Breakfast, dinner"
+        },
+        "stay": {
+          "ua": "Родинний дім",
+          "en": "Family home"
+        }
+      },
+      {
+        "title": {
+          "ua": "Перевал Гуулі",
+          "en": "The Guuli pass"
+        },
+        "route": {
+          "ua": "Жабеші — Адіші",
+          "en": "Zhabeshi — Adishi"
+        },
+        "activities": {
+          "ua": "Найкрасивіший перевал маршруту",
+          "en": "The most scenic pass of the route"
+        },
+        "transferTime": {
+          "ua": "7 год трекінгу",
+          "en": "7 h trekking"
+        },
+        "load": {
+          "ua": "Високе",
+          "en": "High"
+        },
+        "meals": {
+          "ua": "Сніданок, вечеря",
+          "en": "Breakfast, dinner"
+        },
+        "stay": {
+          "ua": "Гостьовий будинок",
+          "en": "Guesthouse"
+        },
+        "note": {
+          "ua": "Переправа через гірську річку",
+          "en": "River crossing on the way"
+        }
+      },
+      {
+        "title": {
+          "ua": "Льодовик Адіші",
+          "en": "Adishi glacier"
+        },
+        "route": {
+          "ua": "Адіші — Іпрарі",
+          "en": "Adishi — Iprari"
+        },
+        "activities": {
+          "ua": "Вихід до льодовика й перевал Чхутнієрі",
+          "en": "Glacier viewpoint and Chkhutnieri pass"
+        },
+        "transferTime": {
+          "ua": "6 год трекінгу",
+          "en": "6 h trekking"
+        },
+        "load": {
+          "ua": "Помірне",
+          "en": "Moderate"
+        },
+        "meals": {
+          "ua": "Сніданок, вечеря",
+          "en": "Breakfast, dinner"
+        },
+        "stay": {
+          "ua": "Гостьовий будинок",
+          "en": "Guesthouse"
+        }
+      },
+      {
+        "title": {
+          "ua": "Ушгулі",
+          "en": "Ushguli"
+        },
+        "route": {
+          "ua": "Іпрарі — Ушгулі",
+          "en": "Iprari — Ushguli"
+        },
+        "activities": {
+          "ua": "Прихід у найвище село Європи",
+          "en": "Arriving at Europe’s highest village"
+        },
+        "transferTime": {
+          "ua": "4 год трекінгу",
+          "en": "4 h trekking"
+        },
+        "load": {
+          "ua": "Легке",
+          "en": "Light"
+        },
+        "meals": {
+          "ua": "Сніданок, вечеря",
+          "en": "Breakfast, dinner"
+        },
+        "stay": {
+          "ua": "Гостьовий будинок",
+          "en": "Guesthouse"
+        }
+      },
+      {
+        "title": {
+          "ua": "Підніжжя Шхари",
+          "en": "The foot of Shkhara"
+        },
+        "route": {
+          "ua": "Ушгулі — льодовик Шхара — Ушгулі",
+          "en": "Ushguli — Shkhara glacier — Ushguli"
+        },
+        "activities": {
+          "ua": "Радіальний вихід до льодовика",
+          "en": "Out-and-back trek to the glacier"
+        },
+        "transferTime": {
+          "ua": "5 год трекінгу",
+          "en": "5 h trekking"
+        },
+        "load": {
+          "ua": "Помірне",
+          "en": "Moderate"
+        },
+        "meals": {
+          "ua": "Сніданок, вечеря",
+          "en": "Breakfast, dinner"
+        },
+        "stay": {
+          "ua": "Гостьовий будинок",
+          "en": "Guesthouse"
+        }
+      },
+      {
+        "title": {
+          "ua": "Повернення і застілля",
+          "en": "Return and feast"
+        },
+        "route": {
+          "ua": "Ушгулі — Местія",
+          "en": "Ushguli — Mestia"
+        },
+        "activities": {
+          "ua": "Трансфер, прощальне грузинське застілля",
+          "en": "Transfer, farewell Georgian feast"
+        },
+        "transferTime": {
+          "ua": "3 год трансфер",
+          "en": "3 h transfer"
+        },
+        "load": {
+          "ua": "Легке",
+          "en": "Light"
+        },
+        "meals": {
+          "ua": "Сніданок, застілля",
+          "en": "Breakfast, feast"
+        },
+        "stay": {
+          "ua": "Гостьовий будинок",
+          "en": "Guesthouse"
+        }
+      },
+      {
+        "title": {
+          "ua": "Від’їзд",
+          "en": "Departure"
+        },
+        "route": {
+          "ua": "Местія — Кутаїсі",
+          "en": "Mestia — Kutaisi"
+        },
+        "activities": {
+          "ua": "Трансфер до аеропорту",
+          "en": "Transfer to the airport"
+        },
+        "transferTime": {
+          "ua": "5 год трансфер",
+          "en": "5 h transfer"
+        },
+        "load": {
+          "ua": "Легке",
+          "en": "Light"
+        },
+        "meals": {
+          "ua": "Сніданок",
+          "en": "Breakfast"
+        },
+        "stay": {
+          "ua": "—",
+          "en": "—"
+        }
+      }
+    ],
+    "physical": {
+      "distanceKm": "≈ 58 km",
+      "elevation": {
+        "ua": "до +1000 м за день",
+        "en": "up to +1000 m per day"
+      },
+      "activityTime": {
+        "ua": "5–7 годин активності на день",
+        "en": "5–7 hours of activity per day"
+      },
+      "routeType": {
+        "ua": "Хат-ту-хат трекінг",
+        "en": "Hut-to-hut trekking"
+      },
+      "experience": {
+        "ua": "Достатньо середньої фізичної форми",
+        "en": "Medium fitness is enough"
+      }
+    },
+    "accommodation": {
+      "type": {
+        "ua": "Родинні гостьові будинки",
+        "en": "Family guesthouses"
+      },
+      "occupancy": {
+        "ua": "2–3 людини",
+        "en": "2–3 people"
+      },
+      "bathroom": {
+        "ua": "Переважно окремий",
+        "en": "Mostly private"
+      },
+      "single": {
+        "ua": "Можливе за доплату",
+        "en": "Available for a surcharge"
+      },
+      "features": [
+        {
+          "ua": "Домашня грузинська кухня щодня",
+          "en": "Home Georgian cooking daily"
+        },
+        {
+          "ua": "Перенесення багажу між селами",
+          "en": "Luggage transfer between villages"
+        }
+      ]
+    },
+    "included": [
+      {
+        "ua": "Супровід Віктора й Андрія",
+        "en": "Guiding by Viktor and Andrii"
+      },
+      {
+        "ua": "Проживання в гостьових будинках",
+        "en": "Accommodation in guesthouses"
+      },
+      {
+        "ua": "Сніданки й вечері",
+        "en": "Breakfasts and dinners"
+      },
+      {
+        "ua": "Усі трансфери за програмою",
+        "en": "All transfers per the program"
+      },
+      {
+        "ua": "Перенесення основного багажу",
+        "en": "Main luggage transfer"
+      }
+    ],
+    "excluded": [
+      {
+        "ua": "Авіаквитки до Кутаїсі",
+        "en": "Flights to Kutaisi"
+      },
+      {
+        "ua": "Обіди на маршруті",
+        "en": "Lunches on the route"
+      },
+      {
+        "ua": "Страхування",
+        "en": "Insurance"
+      },
+      {
+        "ua": "Особисті витрати",
+        "en": "Personal expenses"
+      }
+    ],
+    "gallery": [
+      "/media/ph2-p.jpg",
+      "/media/ph2-l.jpg",
+      "/media/ph3-p.jpg",
+      "/media/ph3-l.jpg",
+      "/media/ph4-p.jpg",
+      "/media/ph4-l.jpg"
+    ],
+    "videos": [],
+    "reviewIds": [
+      "r2"
+    ],
+    "faq": [
+      {
+        "q": {
+          "ua": "Де точка зустрічі?",
+          "en": "Where is the meeting point?"
+        },
+        "a": {
+          "ua": "Аеропорт Кутаїсі. Ми підбираємо групу й разом їдемо в гори.",
+          "en": "Kutaisi airport. We gather the group and drive to the mountains together."
+        }
+      },
+      {
+        "q": {
+          "ua": "Чи потрібен досвід трекінгу?",
+          "en": "Do I need trekking experience?"
+        },
+        "a": {
+          "ua": "Бажаний, але достатньо середньої форми: щодня ходимо 5–7 годин з рюкзаком на день.",
+          "en": "Preferred, but medium fitness is enough: we walk 5–7 hours a day with a daypack."
+        }
+      }
+    ],
+    "seo": {
+      "title": {
+        "ua": "Тур у Грузію: Сванетія і трек до Ушгулі — ShoSho Trip",
+        "en": "Georgia tour: Svaneti trek to Ushguli — ShoSho Trip"
+      },
+      "description": {
+        "ua": "9-денна авторська подорож Сванетією: трек Местія — Ушгулі, льодовик Шхара, вежі й грузинське застілля.",
+        "en": "A 9-day author-led Svaneti journey: the Mestia–Ushguli trek, the Shkhara glacier, stone towers and a Georgian feast."
+      }
+    }
+  },
+  {
+    "id": "morocco-atlas",
+    "slug": "morocco-atlas",
+    "demo": true,
+    "country": {
+      "ua": "Марокко",
+      "en": "Morocco"
+    },
+    "region": {
+      "ua": "Високий Атлас і Сахара",
+      "en": "High Atlas and the Sahara"
+    },
+    "name": {
+      "ua": "Марокко: від Атласу до дюн",
+      "en": "Morocco: from the Atlas to the dunes"
+    },
+    "datesLabel": {
+      "ua": "14–22 листопада 2026",
+      "en": "14–22 November 2026"
+    },
+    "startISO": "2026-11-14",
+    "durationDays": 9,
+    "price": 1150,
+    "currency": "€",
+    "seatsLeft": 12,
+    "seatsTotal": 14,
+    "status": "recruiting",
+    "difficulty": 2,
+    "activity": "culture",
+    "groupSize": {
+      "ua": "12–16 людей",
+      "en": "12–16 people"
+    },
+    "highlight": {
+      "ua": "Берберські села, ночівля в наметах серед дюн і ранок у пустелі",
+      "en": "Berber villages, a night in tents among the dunes and a desert dawn"
+    },
+    "shortDescription": {
+      "ua": "Дев’ять днів контрастів: лабіринти Марракеша, перевали Високого Атласу, берберська гостинність і ніч під зорями серед піщаних дюн Сахари.",
+      "en": "Nine days of contrasts: the labyrinths of Marrakech, High Atlas passes, Berber hospitality and a night under the stars among the Sahara dunes."
+    },
+    "fullDescription": {
+      "ua": "Це найм’якший за навантаженням маршрут ShoSho Trip і водночас один із найяскравіших за враженнями. Ми починаємо в гарячому Марракеші, піднімаємося в береберські села Атласу, ночуємо в родинних ріадах і закінчуємо тим, заради чого варто їхати в Марокко, — ніччю в пустелі, коли навколо тільки пісок, тиша й неймовірна кількість зірок.",
+      "en": "This is the gentlest ShoSho Trip route by load and at the same time one of the brightest by impressions. We start in hot Marrakech, climb into the Berber villages of the Atlas, sleep in family riads and finish with the reason to come to Morocco at all — a night in the desert, when there’s only sand, silence and an unbelievable number of stars."
+    },
+    "highlights": [
+      {
+        "ua": "Загубимося в медині Марракеша з місцевим гідом",
+        "en": "Get lost in the Marrakech medina with a local guide"
+      },
+      {
+        "ua": "Пройдемо берберськими стежками Атласу",
+        "en": "Walk Berber trails in the Atlas"
+      },
+      {
+        "ua": "Заночуємо в наметовому таборі серед дюн",
+        "en": "Sleep in a tented camp among the dunes"
+      },
+      {
+        "ua": "Зустрінемо світанок у пустелі Сахара",
+        "en": "Meet the sunrise in the Sahara"
+      },
+      {
+        "ua": "Спробуємо справжній таджин у берберській родині",
+        "en": "Taste a real tagine with a Berber family"
+      }
+    ],
+    "itinerary": [
+      {
+        "title": {
+          "ua": "Марракеш",
+          "en": "Marrakech"
+        },
+        "route": {
+          "ua": "Приліт — медина",
+          "en": "Arrival — medina"
+        },
+        "activities": {
+          "ua": "Прогулянка старим містом, площа Джемаа-ель-Фна",
+          "en": "Old-town walk, Jemaa el-Fnaa square"
+        },
+        "transferTime": {
+          "ua": "1 год трансфер",
+          "en": "1 h transfer"
+        },
+        "load": {
+          "ua": "Легке",
+          "en": "Light"
+        },
+        "meals": {
+          "ua": "Вечеря",
+          "en": "Dinner"
+        },
+        "stay": {
+          "ua": "Ріад",
+          "en": "Riad"
+        }
+      },
+      {
+        "title": {
+          "ua": "В Атлас",
+          "en": "Into the Atlas"
+        },
+        "route": {
+          "ua": "Марракеш — долина Іміль",
+          "en": "Marrakech — Imlil valley"
+        },
+        "activities": {
+          "ua": "Трансфер у гори, легкий вихід до села",
+          "en": "Transfer to the mountains, easy village walk"
+        },
+        "transferTime": {
+          "ua": "2 год трансфер, 2 год прогулянка",
+          "en": "2 h transfer, 2 h walk"
+        },
+        "load": {
+          "ua": "Легке",
+          "en": "Light"
+        },
+        "meals": {
+          "ua": "Сніданок, вечеря",
+          "en": "Breakfast, dinner"
+        },
+        "stay": {
+          "ua": "Гірський гестхаус",
+          "en": "Mountain guesthouse"
+        }
+      },
+      {
+        "title": {
+          "ua": "Берберські села",
+          "en": "Berber villages"
+        },
+        "route": {
+          "ua": "Іміль — навколишні села",
+          "en": "Imlil — surrounding villages"
+        },
+        "activities": {
+          "ua": "Трекінг між селами, обід у родині",
+          "en": "Village-to-village trek, lunch with a family"
+        },
+        "transferTime": {
+          "ua": "5 год трекінгу",
+          "en": "5 h trekking"
+        },
+        "load": {
+          "ua": "Помірне",
+          "en": "Moderate"
+        },
+        "meals": {
+          "ua": "Сніданок, обід, вечеря",
+          "en": "Breakfast, lunch, dinner"
+        },
+        "stay": {
+          "ua": "Гірський гестхаус",
+          "en": "Mountain guesthouse"
+        }
+      },
+      {
+        "title": {
+          "ua": "Перевал Тізі-н-Тічка",
+          "en": "Tizi n’Tichka pass"
+        },
+        "route": {
+          "ua": "Атлас — Айт-Бен-Хадду",
+          "en": "Atlas — Ait Ben Haddou"
+        },
+        "activities": {
+          "ua": "Переїзд через перевал, старовинна касба",
+          "en": "Drive over the pass, ancient kasbah"
+        },
+        "transferTime": {
+          "ua": "4 год трансфер",
+          "en": "4 h transfer"
+        },
+        "load": {
+          "ua": "Легке",
+          "en": "Light"
+        },
+        "meals": {
+          "ua": "Сніданок, вечеря",
+          "en": "Breakfast, dinner"
+        },
+        "stay": {
+          "ua": "Ріад",
+          "en": "Riad"
+        }
+      },
+      {
+        "title": {
+          "ua": "Долина Драа",
+          "en": "The Draa valley"
+        },
+        "route": {
+          "ua": "Айт-Бен-Хадду — Загора",
+          "en": "Ait Ben Haddou — Zagora"
+        },
+        "activities": {
+          "ua": "Дорога оазисами й пальмовими гаями",
+          "en": "Drive through oases and palm groves"
+        },
+        "transferTime": {
+          "ua": "5 год трансфер",
+          "en": "5 h transfer"
+        },
+        "load": {
+          "ua": "Легке",
+          "en": "Light"
+        },
+        "meals": {
+          "ua": "Сніданок, вечеря",
+          "en": "Breakfast, dinner"
+        },
+        "stay": {
+          "ua": "Гестхаус",
+          "en": "Guesthouse"
+        }
+      },
+      {
+        "title": {
+          "ua": "Ніч у пустелі",
+          "en": "Night in the desert"
+        },
+        "route": {
+          "ua": "Загора — дюни Ерг-Легзіра",
+          "en": "Zagora — Erg Lehzira dunes"
+        },
+        "activities": {
+          "ua": "Верблюди на захід сонця, ночівля в таборі",
+          "en": "Camels at sunset, night in the camp"
+        },
+        "transferTime": {
+          "ua": "2 год трансфер, 1 год на верблюдах",
+          "en": "2 h transfer, 1 h by camel"
+        },
+        "load": {
+          "ua": "Легке",
+          "en": "Light"
+        },
+        "meals": {
+          "ua": "Сніданок, вечеря біля вогню",
+          "en": "Breakfast, dinner by the fire"
+        },
+        "stay": {
+          "ua": "Наметовий табір",
+          "en": "Tented camp"
+        },
+        "note": {
+          "ua": "Світанок серед дюн",
+          "en": "Sunrise among the dunes"
+        }
+      },
+      {
+        "title": {
+          "ua": "Назад через гори",
+          "en": "Back through the mountains"
+        },
+        "route": {
+          "ua": "Пустеля — Уарзазат",
+          "en": "Desert — Ouarzazate"
+        },
+        "activities": {
+          "ua": "Дорога назад, кіностудії Уарзазата",
+          "en": "Drive back, Ouarzazate film studios"
+        },
+        "transferTime": {
+          "ua": "4 год трансфер",
+          "en": "4 h transfer"
+        },
+        "load": {
+          "ua": "Легке",
+          "en": "Light"
+        },
+        "meals": {
+          "ua": "Сніданок, вечеря",
+          "en": "Breakfast, dinner"
+        },
+        "stay": {
+          "ua": "Ріад",
+          "en": "Riad"
+        }
+      },
+      {
+        "title": {
+          "ua": "Повернення в Марракеш",
+          "en": "Return to Marrakech"
+        },
+        "route": {
+          "ua": "Уарзазат — Марракеш",
+          "en": "Ouarzazate — Marrakech"
+        },
+        "activities": {
+          "ua": "Вільний вечір, прощальна вечеря",
+          "en": "Free evening, farewell dinner"
+        },
+        "transferTime": {
+          "ua": "4 год трансфер",
+          "en": "4 h transfer"
+        },
+        "load": {
+          "ua": "Легке",
+          "en": "Light"
+        },
+        "meals": {
+          "ua": "Сніданок, вечеря",
+          "en": "Breakfast, dinner"
+        },
+        "stay": {
+          "ua": "Ріад",
+          "en": "Riad"
+        }
+      },
+      {
+        "title": {
+          "ua": "Від’їзд",
+          "en": "Departure"
+        },
+        "route": {
+          "ua": "Марракеш",
+          "en": "Marrakech"
+        },
+        "activities": {
+          "ua": "Трансфер до аеропорту",
+          "en": "Transfer to the airport"
+        },
+        "transferTime": {
+          "ua": "1 год трансфер",
+          "en": "1 h transfer"
+        },
+        "load": {
+          "ua": "Легке",
+          "en": "Light"
+        },
+        "meals": {
+          "ua": "Сніданок",
+          "en": "Breakfast"
+        },
+        "stay": {
+          "ua": "—",
+          "en": "—"
+        }
+      }
+    ],
+    "physical": {
+      "distanceKm": "≈ 24 km трекінгу",
+      "elevation": {
+        "ua": "невеликі перепади",
+        "en": "gentle elevation"
+      },
+      "activityTime": {
+        "ua": "2–5 годин активності на день",
+        "en": "2–5 hours of activity per day"
+      },
+      "routeType": {
+        "ua": "Культурний маршрут з легким трекінгом",
+        "en": "Cultural route with light trekking"
+      },
+      "experience": {
+        "ua": "Досвід не потрібен",
+        "en": "No experience needed"
+      }
+    },
+    "accommodation": {
+      "type": {
+        "ua": "Ріади, гестхауси, наметовий табір",
+        "en": "Riads, guesthouses, tented camp"
+      },
+      "occupancy": {
+        "ua": "2 людини",
+        "en": "2 people"
+      },
+      "bathroom": {
+        "ua": "Окремий, крім табору в пустелі",
+        "en": "Private, except the desert camp"
+      },
+      "single": {
+        "ua": "Можливе за доплату",
+        "en": "Available for a surcharge"
+      },
+      "features": [
+        {
+          "ua": "Автентичні ріади в старому місті",
+          "en": "Authentic riads in the old town"
+        },
+        {
+          "ua": "Наметовий табір із матрацами й ковдрами",
+          "en": "Tented camp with mattresses and blankets"
+        }
+      ]
+    },
+    "included": [
+      {
+        "ua": "Супровід Віктора й Андрія",
+        "en": "Guiding by Viktor and Andrii"
+      },
+      {
+        "ua": "Проживання за програмою",
+        "en": "Accommodation per the program"
+      },
+      {
+        "ua": "Сніданки й вечері, частина обідів",
+        "en": "Breakfasts, dinners and some lunches"
+      },
+      {
+        "ua": "Усі трансфери комфортним транспортом",
+        "en": "All transfers by comfortable transport"
+      },
+      {
+        "ua": "Верблюди та ніч у пустелі",
+        "en": "Camels and the desert night"
+      }
+    ],
+    "excluded": [
+      {
+        "ua": "Авіаквитки до Марракеша",
+        "en": "Flights to Marrakech"
+      },
+      {
+        "ua": "Обіди поза програмою",
+        "en": "Lunches outside the program"
+      },
+      {
+        "ua": "Вхідні квитки в деякі локації",
+        "en": "Entrance fees at some locations"
+      },
+      {
+        "ua": "Страхування",
+        "en": "Insurance"
+      }
+    ],
+    "gallery": [
+      "/media/ph3-l.jpg",
+      "/media/ph4-p.jpg",
+      "/media/ph4-l.jpg",
+      "/media/ph5-p.jpg",
+      "/media/ph5-l.jpg",
+      "/media/ph1-p.jpg"
+    ],
+    "videos": [],
+    "reviewIds": [
+      "r4"
+    ],
+    "faq": [
+      {
+        "q": {
+          "ua": "Наскільки це фізично складно?",
+          "en": "How physically demanding is it?"
+        },
+        "a": {
+          "ua": "Рівень 2 з 4. Маршрут підходить навіть без досвіду трекінгу — переходи короткі.",
+          "en": "Level 2 of 4. The route suits people without trekking experience — the walks are short."
+        }
+      },
+      {
+        "q": {
+          "ua": "Що вдягати в пустелі вночі?",
+          "en": "What to wear in the desert at night?"
+        },
+        "a": {
+          "ua": "Уночі в пустелі прохолодно, тож потрібна тепла кофта. Детальний список надсилаємо після бронювання.",
+          "en": "Desert nights are cool, so bring a warm layer. We send a detailed list after booking."
+        }
+      }
+    ],
+    "seo": {
+      "title": {
+        "ua": "Тур у Марокко: Атлас, Сахара і берберські села — ShoSho Trip",
+        "en": "Morocco tour: Atlas, Sahara and Berber villages — ShoSho Trip"
+      },
+      "description": {
+        "ua": "9-денна авторська подорож Марокко: Марракеш, Високий Атлас, ніч у наметах серед дюн Сахари й берберська гостинність.",
+        "en": "A 9-day author-led Morocco journey: Marrakech, the High Atlas, a night in tents among the Sahara dunes and Berber hospitality."
+      }
+    }
+  }
+]

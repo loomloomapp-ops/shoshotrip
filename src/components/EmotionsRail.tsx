@@ -287,6 +287,20 @@ export function EmotionsRail({
                 />
               ) : (
                 <>
+                  {/* The poster also lives as its own layer under the video. A
+                      <video> that hands back a blank surface (decoder pressure,
+                      a stream the browser will not paint) is transparent, and
+                      without this the brand-coloured card background showed
+                      through as a flat rectangle. Same URL as the poster
+                      attribute, so it costs no extra request. */}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    className="emotions-card__img emotions-card__poster"
+                    src={item.poster}
+                    alt=""
+                    aria-hidden="true"
+                    draggable={false}
+                  />
                   <video
                     ref={(node) => {
                       if (node) {

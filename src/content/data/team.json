@@ -1,0 +1,60 @@
+[
+  {
+    "id": "viktor",
+    "name": {
+      "ua": "Віктор",
+      "en": "Viktor"
+    },
+    "role": {
+      "ua": "Співзасновник • Автор маршрутів",
+      "en": "Co-founder • Route author"
+    },
+    "bio": {
+      "ua": "Знає десятки місць, яких немає у туристичних путівниках.",
+      "en": "Knows dozens of places you will not find in any travel guide."
+    },
+    "photo": "/media/founder-viktor.jpg",
+    "focus": "50% 70%",
+    "instagram": "",
+    "story": {
+      "ua": [],
+      "en": []
+    }
+  },
+  {
+    "id": "andriy",
+    "name": {
+      "ua": "Андрій",
+      "en": "Andrii"
+    },
+    "role": {
+      "ua": "Співзасновник • Супровід груп",
+      "en": "Co-founder • Group guide"
+    },
+    "bio": {
+      "ua": "Єдина річ, яку ми справді зобов’язані робити, — це жити.",
+      "en": "The only thing we truly owe ourselves is to live."
+    },
+    "photo": "/media/founder-andriy.jpg",
+    "focus": "50% 12%",
+    "instagram": "",
+    "story": {
+      "ua": [
+        "Привіт, я Андрій. Коли діти мого віку вчилися ходити, я вже бігав. Пройшов час — нічого не змінилося.",
+        "Про себе можу сказати одне: живіть. Закохуватися в нові місця, людей. Дарувати усмішки й дивувати тих, хто розділяє момент разом із тобою.",
+        "Після майже п’яти років активних подорожей — соло й у компанії — я зрозумів, що відкритий до більшого, і починаю шлях організації подорожей у різні куточки нашої планети.",
+        "Їжа, їжа, їжа… Тут без слів. Люблю її, адже це основна частина моєї діяльності. Особливо в поїздках шукаю локальні, колоритні страви, щоб краще зрозуміти регіон через його кухню.",
+        "Спорт став моїм другом. Це просто база, яка міцно вкорінилася в моє життя. Калістеніка, баланс тіла — саме в цьому напрямку зараз розвиваюся. Ранкова зарядка — це мінімум, який ми можемо дати своєму тілу.",
+        "Знаю, що подорожі змінили мене. Впевнений, вони змінять і тебе."
+      ],
+      "en": [
+        "Hi, I'm Andrii. When kids my age were learning to walk, I was already running. Years went by and nothing changed.",
+        "There is one thing I can say about myself: live. Fall in love with new places and new people. Hand out smiles and surprise everyone who shares the moment with you.",
+        "After almost five years of travelling hard — solo and in company — I realised I am open to more, and I am starting to build trips to every corner of this planet.",
+        "Food, food, food. No words needed. I love it, because it is the core of what I do. On the road I look for local, characterful dishes to understand a region through its kitchen.",
+        "Sport became my friend. It is simply the base, and it sits deep in my life. Calisthenics and body balance are where I am growing right now. A morning workout is the minimum we can give our body.",
+        "I know travel changed me. I am sure it will change you too."
+      ]
+    }
+  }
+]

@@ -1,0 +1,74 @@
+name: Build and deploy
+
+# The admin panel saves content by committing JSON to this repository. That
+# commit is what triggers a rebuild: the static export is regenerated and
+# uploaded to Hostinger over FTP, so an editor never touches the server.
+#
+# Required repository secrets (Settings > Secrets and variables > Actions):
+#   FTP_SERVER    ftp.yourdomain.com
+#   FTP_USERNAME  the FTP user
+#   FTP_PASSWORD  its password
+#   FTP_DIR       remote web root, e.g. /public_html/   (optional, defaults below)
+# Optional build-time variables (Settings > Secrets and variables > Variables):
+#   NEXT_PUBLIC_SITE_URL, NEXT_PUBLIC_ADMIN_REPO, NEXT_PUBLIC_ADMIN_BRANCH
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "**.md"
+      - ".gitignore"
+  # Lets you redeploy by hand from the Actions tab without a commit.
+  workflow_dispatch:
+
+# A newer save supersedes an in-flight build rather than racing it onto the
+# server; the queued run is cancelled so uploads never interleave.
+concurrency:
+  group: deploy-production
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check types
+        run: npm run typecheck
+
+      - name: Build static export
+        env:
+          NEXT_PUBLIC_SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL }}
+          NEXT_PUBLIC_ADMIN_REPO: ${{ vars.NEXT_PUBLIC_ADMIN_REPO }}
+          NEXT_PUBLIC_ADMIN_BRANCH: ${{ vars.NEXT_PUBLIC_ADMIN_BRANCH }}
+        run: npm run build
+
+      - name: Guard against uploading an empty build
+        # A failed export that still exits 0 would otherwise wipe the live site.
+        run: test -f out/index.html && test -d out/ua
+
+      - name: Upload to Hostinger
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./out/
+          server-dir: ${{ secrets.FTP_DIR || '/public_html/' }}
+          # Server-side files the build does not produce and must not remove:
+          # lead.config.php holds the Telegram secrets, leads.log is the
+          # fallback lead store.
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            lead.config.php
+            leads.log
