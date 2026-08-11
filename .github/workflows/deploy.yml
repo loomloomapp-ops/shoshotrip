@@ -18,6 +18,9 @@ on:
     paths-ignore:
       - "**.md"
       - ".gitignore"
+      # Documentation is not part of the site: rebuilding and re-uploading
+      # every page because a guide was reworded is pure waste.
+      - "docs/**"
   # Lets you redeploy by hand from the Actions tab without a commit.
   workflow_dispatch:
 
