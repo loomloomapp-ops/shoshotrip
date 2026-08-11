@@ -11,6 +11,12 @@ ErrorDocument 404 /404.html
   Require all denied
 </FilesMatch>
 
+# Admin secrets: the GitHub token, the password hash and the lockout counter.
+# admin-api.php includes these itself, so nothing needs to fetch them over HTTP.
+<FilesMatch "^(admin\.config\.php|admin\.auth\.php|admin\.lockout\.json)$">
+  Require all denied
+</FilesMatch>
+
 # Long-cache the immutable build assets
 <IfModule mod_expires.c>
   ExpiresActive On

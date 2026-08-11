@@ -63,12 +63,15 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./out/
           server-dir: ${{ secrets.FTP_DIR || '/public_html/' }}
-          # Server-side files the build does not produce and must not remove:
-          # lead.config.php holds the Telegram secrets, leads.log is the
-          # fallback lead store.
+          # Server-side state the build does not produce and must never remove.
+          # Without these lines every deploy would wipe the admin password and
+          # the GitHub token, locking the panel out of its own site.
           exclude: |
             **/.git*
             **/.git*/**
             **/node_modules/**
             lead.config.php
             leads.log
+            admin.config.php
+            admin.auth.php
+            admin.lockout.json

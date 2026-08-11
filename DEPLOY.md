@@ -55,10 +55,19 @@ configured, leads are appended to `public_html/leads.log` so none are lost.
 Tours, team members and reviews are edited at `https://yourdomain/admin` — see
 **[ADMIN.md](ADMIN.md)** for the one-time setup and the day-to-day guide.
 
+Editors sign in with a password they set on their first visit — there are no
+accounts and no tokens to hand out. `admin-api.php` checks that password and
+holds the GitHub credentials server-side, in `admin.config.php` (copy it from
+`admin.config.example.php`; it is gitignored and denied by `.htaccess`).
+
 The content itself lives as JSON in the repository
 (`src/content/data/tours.json`, `team.json`, `reviews.json`), so there is no
 database. Saving from the panel commits to GitHub, and the workflow in
 `.github/workflows/deploy.yml` rebuilds and re-uploads the site over FTP.
+
+The deploy deliberately skips `admin.config.php`, `admin.auth.php` and
+`lead.config.php`: they live only on the server, and a sync that removed them
+would wipe the admin password on every build.
 
 Once those FTP secrets are configured, steps 1 and 2 above happen
 automatically on every push — manual upload is only needed for the very first

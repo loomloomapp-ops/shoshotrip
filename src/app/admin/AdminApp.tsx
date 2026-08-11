@@ -1,42 +1,29 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
-  checkAccess,
-  loadJson,
-  saveJson,
-  uniqueName,
+  getStatus,
+  loadFile,
+  login as apiLogin,
+  logout as apiLogout,
+  saveFile,
+  setupPassword,
   uploadImage,
-  type RepoRef,
-} from "@/admin/github";
+  type Status,
+} from "@/admin/api";
 import { schemas, slugify, type EntitySchema } from "@/admin/schema";
 import { FieldView, getPath, setPath } from "@/admin/Fields";
 
 /**
- * The admin panel.
+ * The content panel.
  *
- * Entirely client-side: the published site is a static export with no server,
- * so this page loads content from GitHub, edits it in memory, and commits it
- * back. A GitHub Actions workflow then rebuilds and uploads the site.
- *
- * Nothing here is bundled into the public pages — this route is noindexed and
- * excluded from the sitemap.
+ * Sign-in is a password the editor sets on their first visit; the server holds
+ * the GitHub credentials and does the committing, so nothing secret lives in
+ * this browser. See `admin-api.php`.
  */
 
 type Row = Record<string, unknown>;
-
-const TOKEN_KEY = "shosho.admin.token";
-const REPO_KEY = "shosho.admin.repo";
-
-const DEFAULT_REPO =
-  process.env.NEXT_PUBLIC_ADMIN_REPO || "loomloomapp-ops/shoshotrip";
-const DEFAULT_BRANCH = process.env.NEXT_PUBLIC_ADMIN_BRANCH || "main";
-
-function parseRepo(value: string, branch: string): RepoRef | null {
-  const [owner, repo] = value.trim().replace(/^https:\/\/github\.com\//, "").split("/");
-  if (!owner || !repo) return null;
-  return { owner, repo: repo.replace(/\.git$/, ""), branch };
-}
+type Screen = "loading" | "setup" | "login" | "panel";
 
 /** Localized-or-plain label for a list row. */
 function rowLabel(row: Row, key: string): string {
@@ -46,11 +33,12 @@ function rowLabel(row: Row, key: string): string {
 }
 
 export function AdminApp() {
-  const [token, setToken] = useState("");
-  const [repoInput, setRepoInput] = useState(DEFAULT_REPO);
-  const [ready, setReady] = useState(false);
+  const [screen, setScreen] = useState<Screen>("loading");
+  const [serverReady, setServerReady] = useState(true);
+  const [password, setPassword] = useState("");
+  const [password2, setPassword2] = useState("");
   const [authError, setAuthError] = useState("");
-  const [checking, setChecking] = useState(false);
+  const [busy, setBusy] = useState(false);
 
   const [active, setActive] = useState<EntitySchema>(schemas[0]);
   const [rows, setRows] = useState<Row[]>([]);
@@ -61,17 +49,17 @@ export function AdminApp() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const repo = useMemo(() => parseRepo(repoInput, DEFAULT_BRANCH), [repoInput]);
-
-  /* Restore a previous session. The token lives only in this browser. */
+  /* Which screen to show is the server's call, not the browser's. */
   useEffect(() => {
-    const saved = localStorage.getItem(TOKEN_KEY);
-    const savedRepo = localStorage.getItem(REPO_KEY);
-    if (savedRepo) setRepoInput(savedRepo);
-    if (saved) {
-      setToken(saved);
-      setReady(true);
-    }
+    getStatus()
+      .then((s: Status) => {
+        setServerReady(s.ready);
+        setScreen(s.authed ? "panel" : s.configured ? "login" : "setup");
+      })
+      .catch((e) => {
+        setAuthError(e instanceof Error ? e.message : "Сервер недоступний");
+        setScreen("login");
+      });
   }, []);
 
   /* Warn before losing unsaved edits. */
@@ -82,71 +70,77 @@ export function AdminApp() {
     return () => window.removeEventListener("beforeunload", onLeave);
   }, [dirty]);
 
-  const openEntity = useCallback(
-    async (schema: EntitySchema) => {
-      if (!repo || !token) return;
-      setLoading(true);
-      setError("");
-      setStatus("");
-      try {
-        const file = await loadJson<Row[]>(repo, token, schema.path);
-        setActive(schema);
-        setRows(file.data);
-        setSha(file.sha);
-        setSelected(null);
-        setDirty(false);
-      } catch (e) {
-        setError(e instanceof Error ? e.message : "Не вдалося завантажити дані");
-      } finally {
-        setLoading(false);
-      }
-    },
-    [repo, token],
-  );
+  const openEntity = useCallback(async (schema: EntitySchema) => {
+    setLoading(true);
+    setError("");
+    setStatus("");
+    try {
+      const file = await loadFile<Row[]>(schema.name);
+      setActive(schema);
+      setRows(Array.isArray(file.data) ? file.data : []);
+      setSha(file.sha);
+      setSelected(null);
+      setDirty(false);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Не вдалося завантажити дані");
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
-    if (ready) void openEntity(active);
-    // Loading the first entity once the session is ready; `active` is set inside.
+    if (screen === "panel") void openEntity(active);
+    // Loads the current section once the panel opens; `active` is set inside.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ready]);
+  }, [screen]);
 
-  async function signIn() {
-    if (!repo) {
-      setAuthError("Вкажіть репозиторій у форматі власник/назва");
+  async function submitSetup() {
+    if (password.length < 10) {
+      setAuthError("Пароль має бути не коротшим за 10 символів.");
       return;
     }
-    setChecking(true);
+    if (password !== password2) {
+      setAuthError("Паролі не збігаються.");
+      return;
+    }
+    setBusy(true);
     setAuthError("");
     try {
-      await checkAccess(repo, token);
-      localStorage.setItem(TOKEN_KEY, token);
-      localStorage.setItem(REPO_KEY, repoInput);
-      setReady(true);
+      await setupPassword(password);
+      setPassword("");
+      setPassword2("");
+      setScreen("panel");
     } catch (e) {
-      setAuthError(e instanceof Error ? e.message : "Не вдалося перевірити токен");
+      setAuthError(e instanceof Error ? e.message : "Не вдалося зберегти пароль");
     } finally {
-      setChecking(false);
+      setBusy(false);
     }
   }
 
-  function signOut() {
+  async function submitLogin() {
+    setBusy(true);
+    setAuthError("");
+    try {
+      await apiLogin(password);
+      setPassword("");
+      setScreen("panel");
+    } catch (e) {
+      setAuthError(e instanceof Error ? e.message : "Не вдалося увійти");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function signOut() {
     if (dirty && !confirm("Є незбережені зміни. Вийти і втратити їх?")) return;
-    localStorage.removeItem(TOKEN_KEY);
-    setToken("");
-    setReady(false);
+    await apiLogout().catch(() => {});
     setRows([]);
     setSelected(null);
     setDirty(false);
+    setScreen("login");
   }
 
-  const onUpload = useCallback(
-    async (file: File): Promise<string> => {
-      if (!repo || !token) throw new Error("Немає доступу до репозиторію");
-      const bytes = await file.arrayBuffer();
-      return uploadImage(repo, token, uniqueName(file.name), bytes);
-    },
-    [repo, token],
-  );
+  const onUpload = useCallback((file: File) => uploadImage(file), []);
 
   function updateField(path: string, value: unknown) {
     if (selected === null) return;
@@ -160,15 +154,14 @@ export function AdminApp() {
   }
 
   function addRow() {
-    const blank = active.blank() as Row;
-    setRows((prev) => [...prev, blank]);
+    setRows((prev) => [...prev, active.blank() as Row]);
     setSelected(rows.length);
     setDirty(true);
   }
 
   function removeRow(index: number) {
     const label = rowLabel(rows[index], active.labelKey) || "цей запис";
-    if (!confirm(`Видалити «${label}»? Це збережеться у наступному коміті.`)) return;
+    if (!confirm(`Видалити «${label}»? Зміна набуде чинності після збереження.`)) return;
     setRows((prev) => prev.filter((_, i) => i !== index));
     setSelected(null);
     setDirty(true);
@@ -201,21 +194,18 @@ export function AdminApp() {
           v == null ||
           v === "" ||
           (typeof v === "object" && !Array.isArray(v) && !(v as { ua?: string }).ua);
-        if (empty) {
-          return { rows: next, problem: `Запис ${i + 1}: не заповнено «${f.label}»` };
-        }
+        if (empty) return { rows: next, problem: `Запис ${i + 1}: не заповнено «${f.label}»` };
       }
     }
 
-    const slugs = next.map((r) => String(r.slug ?? r.id));
-    const dupe = slugs.find((s, i) => slugs.indexOf(s) !== i);
+    const keys = next.map((r) => String(r.slug ?? r.id));
+    const dupe = keys.find((s, i) => keys.indexOf(s) !== i);
     if (dupe) return { rows: next, problem: `Дві однакові адреси сторінки: ${dupe}` };
 
     return { rows: next, problem: "" };
   }
 
   async function save() {
-    if (!repo || !token) return;
     const { rows: prepared, problem } = prepare(rows);
     if (problem) {
       setError(problem);
@@ -224,16 +214,14 @@ export function AdminApp() {
     setLoading(true);
     setError("");
     try {
-      const newSha = await saveJson(
-        repo,
-        token,
-        active.path,
+      const res = await saveFile(
+        active.name,
         prepared,
-        `admin: оновлено ${active.title.toLowerCase()}`,
         sha,
+        `admin: оновлено ${active.title.toLowerCase()}`,
       );
       setRows(prepared);
-      setSha(newSha);
+      setSha(res.sha);
       setDirty(false);
       setStatus("Збережено. Сайт оновиться за кілька хвилин, коли завершиться збірка.");
     } catch (e) {
@@ -243,44 +231,77 @@ export function AdminApp() {
     }
   }
 
-  /* ---- login ------------------------------------------------------------- */
+  /* ---- gates ------------------------------------------------------------- */
 
-  if (!ready) {
+  if (screen === "loading") {
+    return (
+      <div className="ad__gate">
+        <p className="ad__muted">Завантаження…</p>
+      </div>
+    );
+  }
+
+  if (screen === "setup" || screen === "login") {
+    const isSetup = screen === "setup";
     return (
       <div className="ad__gate">
         <div className="ad__gate-card">
-          <h1 className="ad__gate-title">ShoSho Trip — панель контенту</h1>
+          <h1 className="ad__gate-title">
+            {isSetup ? "Створіть пароль" : "ShoSho Trip — панель контенту"}
+          </h1>
           <p className="ad__gate-text">
-            Вхід за токеном GitHub. Токен зберігається лише у цьому браузері й нікуди не
-            передається, окрім самого GitHub.
+            {isSetup
+              ? "Це перший вхід. Придумайте пароль — далі заходитимете лише за ним. Зробіть це зараз: доки пароль не встановлено, панель відкрита."
+              : "Введіть пароль, щоб редагувати тури, команду й відгуки."}
           </p>
+
+          {!serverReady && (
+            <p className="af__error">
+              На сервері немає admin.config.php — збереження не працюватиме, доки його не
+              додати. Опис у ADMIN.md.
+            </p>
+          )}
+
           <label className="af__field">
-            <span className="af__label">Репозиторій</span>
-            <input
-              className="af__input"
-              value={repoInput}
-              onChange={(e) => setRepoInput(e.target.value)}
-              placeholder="власник/назва"
-            />
-          </label>
-          <label className="af__field">
-            <span className="af__label">Токен доступу</span>
+            <span className="af__label">Пароль</span>
             <input
               className="af__input"
               type="password"
-              value={token}
-              autoComplete="current-password"
-              onChange={(e) => setToken(e.target.value)}
-              placeholder="github_pat_…"
+              value={password}
+              autoComplete={isSetup ? "new-password" : "current-password"}
+              onChange={(e) => setPassword(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && !isSetup) void submitLogin();
+              }}
             />
-            <span className="af__hint">
-              Потрібен fine-grained токен із дозволом Contents: read and write на цей
-              репозиторій. Як його створити — описано в ADMIN.md.
-            </span>
+            {isSetup && <span className="af__hint">Не менше 10 символів.</span>}
           </label>
+
+          {isSetup && (
+            <label className="af__field">
+              <span className="af__label">Пароль ще раз</span>
+              <input
+                className="af__input"
+                type="password"
+                value={password2}
+                autoComplete="new-password"
+                onChange={(e) => setPassword2(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") void submitSetup();
+                }}
+              />
+            </label>
+          )}
+
           {authError && <p className="af__error">{authError}</p>}
-          <button className="af__btn" type="button" disabled={checking || !token} onClick={() => void signIn()}>
-            {checking ? "Перевіряємо…" : "Увійти"}
+
+          <button
+            className="af__btn"
+            type="button"
+            disabled={busy || !password}
+            onClick={() => void (isSetup ? submitSetup() : submitLogin())}
+          >
+            {busy ? "Зачекайте…" : isSetup ? "Зберегти пароль і увійти" : "Увійти"}
           </button>
         </div>
       </div>
@@ -320,7 +341,7 @@ export function AdminApp() {
           >
             {loading ? "Зберігаємо…" : "Зберегти"}
           </button>
-          <button type="button" className="af__btn af__btn--ghost" onClick={signOut}>
+          <button type="button" className="af__btn af__btn--ghost" onClick={() => void signOut()}>
             Вийти
           </button>
         </div>
@@ -366,9 +387,7 @@ export function AdminApp() {
 
         <main className="ad__editor">
           {current === null ? (
-            <p className="ad__muted ad__empty">
-              Оберіть запис зліва або натисніть «Додати».
-            </p>
+            <p className="ad__muted ad__empty">Оберіть запис зліва або натисніть «Додати».</p>
           ) : (
             <>
               <div className="ad__editor-head">
