@@ -31,13 +31,18 @@ export const PORTRAIT = [
  *  where a wide frame would be cropped down to a thin strip. */
 export const heroPoster = "/media/hero-banner.jpg";
 export const heroPosterPortrait = "/media/hero-banner-portrait.jpg";
-export const heroVideoMp4 = "/media/hero.mp4";
-export const heroVideoWebm = "/media/hero.webm";
+
+/** Optional clip layered over the hero photo. Null while no such file exists —
+ *  the hero then renders no <video> at all, instead of asking the server for a
+ *  file that is not there on every visit. Point these at the transcoded paths
+ *  (see the ffmpeg lines above) and the video layer comes back by itself. */
+export const heroVideoMp4: string | null = null;
+export const heroVideoWebm: string | null = null;
 
 /** Full-bleed looping video behind the closing "final CTA" panel. The .mp4 is
  * an H.264 clip (owner source). Poster shows until it loads / if it fails. */
 export const finalCtaVideoMp4 = "/media/final-cta.mp4";
-export const finalCtaPoster = "/media/hero-banner.png";
+export const finalCtaPoster = "/media/hero-banner.jpg";
 
 /* Founder photos moved to `data/team.json` (photo + focus per person), so the
    team block is no longer limited to a fixed pair. */
@@ -48,7 +53,7 @@ export const whyInset = "/media/ph2-l.jpg";
  *  portrait — the stage crops it, see .why-stage__img object-position. */
 export const whyScene = "/media/why-scene.jpg";
 /** Full-bleed scene behind the tour-matcher quiz. */
-export const quizScene = "/media/quiz-scene.png";
+export const quizScene = "/media/quiz-scene.jpg";
 
 /** Deterministic pick from a list (no Math.random — SSR-stable). */
 export function pickLandscape(i: number): string {

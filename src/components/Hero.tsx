@@ -16,13 +16,14 @@ import { heroPoster, heroPosterPortrait, heroVideoMp4, heroVideoWebm } from "@/c
  * CTA (white pill + lime accent circle), a frosted rating card pinned to the
  * bottom-left, and a horizontal destination slider pinned to the bottom-right.
  * Composition mirrors the Tripvana reference; content + palette are ShoSho's.
- * OWNER: add /public/media/hero.mp4 (+ .webm) to enable video; until then the
- * landscape poster (heroPoster) is used as the background.
+ * OWNER: add /public/media/hero.mp4 (+ .webm) and point media.ts at them to
+ * enable video; until then the landscape poster is the background on its own.
  */
 const HERO_POSTER = heroPoster;
 const HERO_POSTER_PORTRAIT = heroPosterPortrait;
 const HERO_VIDEO_MP4 = heroVideoMp4;
 const HERO_VIDEO_WEBM = heroVideoWebm;
+const HAS_HERO_VIDEO = Boolean(HERO_VIDEO_MP4 || HERO_VIDEO_WEBM);
 
 export function Hero({ locale }: { locale: Locale }) {
   const dict = getDict(locale);
@@ -47,7 +48,7 @@ export function Hero({ locale }: { locale: Locale }) {
             fetchPriority="high"
           />
         </picture>
-        {videoOk ? (
+        {HAS_HERO_VIDEO && videoOk ? (
           <video
             className="hero__media hero__media--video"
             autoPlay
@@ -58,8 +59,8 @@ export function Hero({ locale }: { locale: Locale }) {
             onError={() => setVideoOk(false)}
             aria-hidden="true"
           >
-            <source src={HERO_VIDEO_WEBM} type="video/webm" />
-            <source src={HERO_VIDEO_MP4} type="video/mp4" />
+            {HERO_VIDEO_WEBM ? <source src={HERO_VIDEO_WEBM} type="video/webm" /> : null}
+            {HERO_VIDEO_MP4 ? <source src={HERO_VIDEO_MP4} type="video/mp4" /> : null}
           </video>
         ) : null}
         <div className="hero__scrim" />
