@@ -28,3 +28,6 @@ tsconfig.tsbuildinfo
 /public/admin.config.php
 /public/admin.auth.php
 /public/admin.lockout.json
+
+# Generated: fonts inlined as base64, rebuilt by docs/build-guide.sh
+/docs/admin-guide.html

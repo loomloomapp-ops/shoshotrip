@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<title>ShoSho Trip — панель контенту</title>
+<style>
+/* FONTS_PLACEHOLDER */
+
+:root {
+  --ink: #14201c;
+  --muted: #5c6863;
+  --faint: #8b948f;
+  --paper: #fbf9f3;
+  --milk: #f6f2ea;
+  --purple: #6450d2;
+  --purple-deep: #4a37a5;
+  --purple-soft: #eceafb;
+  --terracotta: #ff5528;
+  --lime: #dcff00;
+  --graphite: #1b2321;
+  --line: rgba(20, 32, 28, 0.14);
+  --line-soft: rgba(20, 32, 28, 0.08);
+}
+
+@page { size: A4; margin: 17mm 16mm 16mm; }
+@page :first { margin: 0; }
+
+* { box-sizing: border-box; }
+
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+body {
+  margin: 0;
+  font-family: "InterTight", system-ui, sans-serif;
+  font-size: 10.4pt;
+  line-height: 1.62;
+  color: var(--ink);
+  background: #fff;
+}
+
+h1, h2, h3, .display { font-family: "Unbounded", system-ui, sans-serif; }
+
+/* ---------- cover ---------- */
+
+.cover {
+  height: 297mm;
+  padding: 30mm 22mm 22mm;
+  background: var(--graphite);
+  color: var(--milk);
+  display: flex;
+  flex-direction: column;
+  page-break-after: always;
+  position: relative;
+  overflow: hidden;
+}
+/* Soft glow rising from the lower right. Painted across the whole cover so the
+   fade has room to finish; a clipped circle leaves a visible arc in print. */
+.cover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(115% 85% at 84% 106%,
+    rgba(100, 80, 210, 0.72) 0%,
+    rgba(100, 80, 210, 0.30) 34%,
+    rgba(100, 80, 210, 0.08) 55%,
+    rgba(100, 80, 210, 0) 72%);
+}
+.cover > * { position: relative; z-index: 1; }
+
+.brand {
+  font-family: "Unbounded", sans-serif;
+  font-weight: 700;
+  font-size: 13pt;
+  line-height: 1.06;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+.cover h1 {
+  margin: auto 0 0;
+  font-size: 34pt;
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  max-width: 15ch;
+}
+.cover .kicker {
+  margin: 0 0 9mm;
+  font-size: 11pt;
+  color: rgba(246, 242, 234, 0.66);
+  max-width: 44ch;
+  line-height: 1.55;
+}
+.cover .rule {
+  width: 26mm; height: 3px;
+  background: var(--lime);
+  margin: 8mm 0 6mm;
+}
+.cover .meta {
+  margin-top: 14mm;
+  padding-top: 5mm;
+  border-top: 1px solid rgba(246, 242, 234, 0.2);
+  display: flex;
+  justify-content: space-between;
+  font-size: 8.6pt;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(246, 242, 234, 0.55);
+}
+
+/* ---------- contents ---------- */
+
+.toc { page-break-after: always; }
+.toc ol { list-style: none; margin: 0; padding: 0; counter-reset: toc; }
+.toc li {
+  counter-increment: toc;
+  display: flex;
+  align-items: baseline;
+  gap: 4mm;
+  padding: 3.1mm 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+.toc li::before {
+  content: counter(toc, decimal-leading-zero);
+  font-family: "Unbounded", sans-serif;
+  font-size: 8.4pt;
+  color: var(--purple);
+  min-width: 8mm;
+}
+.toc .t { font-weight: 500; }
+.toc .d { color: var(--muted); font-size: 9.4pt; }
+
+/* ---------- sections ---------- */
+
+section { page-break-inside: auto; }
+section + section { margin-top: 11mm; }
+.break { page-break-before: always; }
+
+h2 {
+  font-size: 16pt;
+  font-weight: 600;
+  line-height: 1.16;
+  letter-spacing: -0.025em;
+  margin: 0 0 4mm;
+  padding-bottom: 3mm;
+  border-bottom: 2px solid var(--ink);
+  page-break-after: avoid;
+}
+h2 .n {
+  display: inline-block;
+  font-size: 9pt;
+  color: var(--purple);
+  margin-right: 3.5mm;
+  vertical-align: 1.5mm;
+}
+h3 {
+  font-size: 11pt;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  margin: 7mm 0 2.5mm;
+  page-break-after: avoid;
+}
+p { margin: 0 0 3.4mm; max-width: 68ch; orphans: 2; widows: 2; }
+.lead { font-size: 11pt; color: var(--muted); max-width: 62ch; }
+strong { font-weight: 600; }
+em { font-style: normal; background: linear-gradient(transparent 62%, rgba(220,255,0,0.55) 62%); }
+
+ul, ol { margin: 0 0 3.4mm; padding-left: 5mm; max-width: 68ch; }
+li { margin-bottom: 1.6mm; }
+li::marker { color: var(--faint); }
+
+code, .mono {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 9pt;
+  background: var(--milk);
+  padding: 0.4mm 1.4mm;
+  border-radius: 2px;
+}
+
+/* ---------- callouts ---------- */
+
+.note, .warn {
+  margin: 4mm 0 5mm;
+  padding: 4mm 5mm;
+  background: var(--paper);
+  border-left: 3px solid var(--purple);
+  page-break-inside: avoid;
+}
+.warn { border-left-color: var(--terracotta); }
+.note p:last-child, .warn p:last-child { margin-bottom: 0; }
+.note .h, .warn .h {
+  font-family: "Unbounded", sans-serif;
+  font-size: 8.2pt;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--purple);
+  margin-bottom: 2mm;
+}
+.warn .h { color: var(--terracotta); }
+
+/* ---------- flow diagram ---------- */
+
+.flow {
+  margin: 5mm 0 6mm;
+  page-break-inside: avoid;
+}
+.flow .step {
+  display: flex;
+  gap: 4mm;
+  align-items: flex-start;
+  padding: 3mm 0;
+  border-top: 1px solid var(--line-soft);
+}
+.flow .step:last-child { border-bottom: 1px solid var(--line-soft); }
+.flow .ix {
+  font-family: "Unbounded", sans-serif;
+  font-size: 8.4pt;
+  font-weight: 600;
+  color: #fff;
+  background: var(--purple);
+  width: 6.4mm; height: 6.4mm;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex: none;
+  margin-top: 0.6mm;
+}
+.flow .step:last-child .ix { background: var(--ink); }
+.flow .tx { flex: 1; }
+.flow .tx b { display: block; font-weight: 600; margin-bottom: 0.6mm; }
+.flow .tx span { color: var(--muted); font-size: 9.6pt; }
+
+/* ---------- tables ---------- */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 4mm 0 5mm;
+  font-size: 9.6pt;
+  page-break-inside: auto;
+}
+thead th {
+  text-align: left;
+  font-family: "Unbounded", sans-serif;
+  font-size: 8pt;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 0 0 2.4mm;
+  border-bottom: 1.5px solid var(--ink);
+}
+tbody td {
+  padding: 2.8mm 0;
+  border-bottom: 1px solid var(--line-soft);
+  vertical-align: top;
+}
+tbody tr { page-break-inside: avoid; }
+td:first-child, th:first-child { padding-right: 6mm; width: 34%; }
+td:first-child { font-weight: 500; }
+table.trio td:first-child, table.trio th:first-child { width: 22%; }
+
+/* ---------- checklist ---------- */
+
+.check { margin: 4mm 0; padding: 0; list-style: none; }
+.check li {
+  position: relative;
+  padding-left: 7mm;
+  margin-bottom: 2.4mm;
+}
+.check li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 1.4mm;
+  width: 3.6mm; height: 3.6mm;
+  border: 1.4px solid var(--purple);
+  border-radius: 1px;
+}
+
+.end {
+  margin-top: 10mm;
+  padding-top: 5mm;
+  border-top: 1px solid var(--line);
+  font-size: 9pt;
+  color: var(--faint);
+}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="brand">Sho<br>Sho<br>Trip</div>
+  <h1>Панель контенту</h1>
+  <div class="rule"></div>
+  <p class="kicker">Як самостійно додавати тури, людей у команді та відгуки. Без програміста, без бази даних, без ризику зламати сайт.</p>
+  <div class="meta">
+    <span>Інструкція для редактора</span>
+    <span>Серпень 2026</span>
+  </div>
+</div>
+
+<div class="toc">
+  <h2><span class="n">00</span>Зміст</h2>
+  <ol>
+    <li><span class="t">Що це і де воно</span></li>
+    <li><span class="t">Перший вхід</span></li>
+    <li><span class="t">Чому зміни з'являються не одразу</span></li>
+    <li><span class="t">Як влаштована панель</span></li>
+    <li><span class="t">Дві мови</span></li>
+    <li><span class="t">Фотографії</span></li>
+    <li><span class="t">Тури</span></li>
+    <li><span class="t">Команда</span></li>
+    <li><span class="t">Відгуки</span></li>
+    <li><span class="t">Якщо щось пішло не так</span></li>
+    <li><span class="t">Чого панель не змінює</span></li>
+    <li><span class="t">Коротка пам'ятка</span></li>
+  </ol>
+</div>
+
+<section>
+  <h2><span class="n">01</span>Що це і де воно</h2>
+  <p class="lead">Панель контенту живе на самому сайті. Окремої програми встановлювати не треба - достатньо браузера.</p>
+  <p>Адреса: до звичайної адреси сайту додайте <code>/admin</code>.</p>
+  <table>
+    <tbody>
+      <tr><td>Сайт</td><td class="mono">purple-pigeon-371059.hostingersite.com</td></tr>
+      <tr><td>Панель</td><td class="mono">purple-pigeon-371059.hostingersite.com/admin</td></tr>
+    </tbody>
+  </table>
+  <p>Коли підключите власний домен, адреса панелі зміниться так само: <code>ваш-домен/admin</code>.</p>
+  <p>Через панель редагуються три розділи сайту: <strong>тури</strong>, <strong>команда</strong> і <strong>відгуки</strong>. Усе інше змінюється в коді - список наприкінці цієї інструкції.</p>
+  <div class="note">
+    <div class="h">Працює і з телефона</div>
+    <p>Панель відкривається на будь-якому пристрої. Але заповнювати довгі описи турів зручніше з комп'ютера: полів багато, і на маленькому екрані легко щось пропустити.</p>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">02</span>Перший вхід</h2>
+  <p class="lead">Вхід тільки за паролем. Ніяких логінів, акаунтів чи кодів з пошти.</p>
+  <p>Пароль ви задаєте самі при першому відкритті панелі:</p>
+  <div class="flow">
+    <div class="step"><span class="ix">1</span><span class="tx"><b>Відкрийте сторінку панелі</b><span>Вона побачить, що пароля ще немає.</span></span></div>
+    <div class="step"><span class="ix">2</span><span class="tx"><b>Придумайте пароль</b><span>Мінімум 10 символів. Введіть двічі.</span></span></div>
+    <div class="step"><span class="ix">3</span><span class="tx"><b>Готово</b><span>Ви всередині. Надалі просто вводите цей пароль.</span></span></div>
+  </div>
+  <div class="warn">
+    <div class="h">Зробіть це одразу</div>
+    <p>Доки пароль не встановлено, сторінка відкрита для всіх: хто зайде першим, той його й задасть. Після встановлення форма створення закривається назавжди, і випадковий відвідувач уже нічого не зробить.</p>
+  </div>
+  <h3>Якщо пароль забуто</h3>
+  <p>Скинути його з самої панелі не можна - це навмисно. Потрібен доступ до файлів хостингу: у файловому менеджері Hostinger видаліть файл <code>admin.auth.php</code> у теці сайту, і панель знову запропонує створити пароль.</p>
+  <h3>Захист від підбору</h3>
+  <p>Вісім невдалих спроб поспіль - і вхід блокується на 15 хвилин. Якщо побачили таке повідомлення, просто зачекайте; після успішного входу лічильник обнуляється.</p>
+</section>
+
+<section class="break">
+  <h2><span class="n">03</span>Чому зміни з'являються не одразу</h2>
+  <p class="lead">Між натисканням «Зберегти» і появою змін на сайті проходить близько двох хвилин. Це нормально і так задумано.</p>
+  <p>Сайт зроблено як набір готових сторінок - тому він швидкий і його майже неможливо зламати. Але за це доводиться платити тим, що після кожної правки сторінки треба перезібрати наново.</p>
+  <div class="flow">
+    <div class="step"><span class="ix">1</span><span class="tx"><b>Ви редагуєте і тиснете «Зберегти»</b><span>Панель перевіряє пароль.</span></span></div>
+    <div class="step"><span class="ix">2</span><span class="tx"><b>Зміни лягають у сховище контенту</b><span>Кожне збереження записується з датою.</span></span></div>
+    <div class="step"><span class="ix">3</span><span class="tx"><b>Сайт перезбирається автоматично</b><span>Близько двох хвилин.</span></span></div>
+    <div class="step"><span class="ix">4</span><span class="tx"><b>Зміни бачать відвідувачі</b><span>Оновіть сторінку сайту.</span></span></div>
+  </div>
+  <p><strong>Повторно зберігати не потрібно.</strong> Якщо натиснути «Зберегти» кілька разів поспіль, ви лише запустите кілька збірок підряд, і чекати доведеться довше.</p>
+  <div class="note">
+    <div class="h">Приємний побічний ефект</div>
+    <p>Кожне збереження - це запис в історії з датою і переліком змін. Будь-яку правку можна подивитися або відкотити навіть через місяці. Помилково стертий опис туру не втрачається назавжди.</p>
+  </div>
+</section>
+
+<section class="break">
+  <h2><span class="n">04</span>Як влаштована панель</h2>
+  <p>Угорі три вкладки: <strong>Тури</strong>, <strong>Команда</strong>, <strong>Відгуки</strong>. Зліва список записів, справа форма вибраного.</p>
+  <table>
+    <thead><tr><th>Дія</th><th>Де</th></tr></thead>
+    <tbody>
+      <tr><td>Додати запис</td><td>Кнопка «Додати» над списком зліва</td></tr>
+      <tr><td>Зберегти</td><td>Угорі праворуч. Активна тільки коли є незбережені зміни</td></tr>
+      <tr><td>Видалити</td><td>У формі самого запису, внизу</td></tr>
+      <tr><td>Вийти</td><td>Угорі праворуч</td></tr>
+    </tbody>
+  </table>
+  <p>Якщо спробувати закрити вкладку з незбереженими змінами, браузер попередить. Але не покладайтесь на це: зберігайте самі.</p>
+  <div class="warn">
+    <div class="h">Видалення остаточне</div>
+    <p>Видалений тур зникає зі сторінки турів, а його адреса перестає відкриватися. Якщо тур просто завершився, надійніше не видаляти його, а лишити - або спершу впевнитись, що на нього ніде немає посилань.</p>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">05</span>Дві мови</h2>
+  <p class="lead">Сайт працює українською та англійською. Тому текстові поля показані парами.</p>
+  <p>Ліворуч - <strong>Українською</strong>, праворуч - <strong>English</strong>. Заповнюйте обидва: англомовна версія сайту бере текст саме з правого поля, і якщо там порожньо, у відвідувача буде порожнє місце.</p>
+  <p>Якщо англійського варіанту поки немає, краще написати хоч коротко, ніж лишити порожнім. Порожній блок виглядає як помилка сайту, а короткий текст - ні.</p>
+</section>
+
+<section class="break">
+  <h2><span class="n">06</span>Фотографії</h2>
+  <p class="lead">Біля кожного поля з фото є кнопка «Завантажити файл». Але перед завантаженням варто підготувати знімок.</p>
+  <table>
+    <thead><tr><th>Параметр</th><th>Як треба</th></tr></thead>
+    <tbody>
+      <tr><td>Розмір файлу</td><td>До 500 КБ. Технічна межа - 8 МБ, але фото на 5 МБ помітно сповільнить сайт для кожного відвідувача</td></tr>
+      <tr><td>Ширина</td><td>Близько 1600 пікселів. Більше не дасть виграшу в якості, лише ваги</td></tr>
+      <tr><td>Формат</td><td>JPEG або PNG</td></tr>
+      <tr><td>HEIC з айфона</td><td>Не підійде. Браузери його не показують, і панель такий файл відхилить</td></tr>
+    </tbody>
+  </table>
+  <h3>Як зберегти айфонне фото у JPEG</h3>
+  <p>Налаштування - Камера - Формати - «Найбільш сумісний». Знімки після цього зберігатимуться одразу в JPEG. Уже зняте HEIC можна відкрити у «Фото», натиснути «Поділитися» і зберегти копію - вона буде у сумісному форматі.</p>
+  <h3>Кадрування</h3>
+  <p>Кожен блок сайту обрізає фото під свій формат: десь горизонтально, десь вертикально. Тому <strong>тримайте головне ближче до центру кадру</strong> - тоді знімок виглядатиме добре в будь-якому блоці. Обличчя або деталь біля самого краю може бути зрізана.</p>
+  <div class="note">
+    <div class="h">Чим стискати</div>
+    <p>Найпростіше - <span class="mono">squoosh.app</span> у браузері: перетягнули фото, виставили якість близько 80, зберегли. Нічого встановлювати не треба.</p>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">07</span>Тури</h2>
+  <p class="lead">Найбільший розділ. Один запис - одна сторінка туру на сайті.</p>
+  <table>
+    <thead><tr><th>Поле</th><th>Що писати</th></tr></thead>
+    <tbody>
+      <tr><td>Назва</td><td>Як тур називається на сайті. Коротко</td></tr>
+      <tr><td>Адреса сторінки</td><td>Латиниця через дефіс: <span class="mono">morocco-atlas</span>. Заповниться сама з назви, якщо лишити порожньою</td></tr>
+      <tr><td>Дата початку</td><td>У форматі <span class="mono">2026-11-14</span>. За нею тури сортуються на сайті</td></tr>
+      <tr><td>Опис</td><td>Основний текст сторінки</td></tr>
+      <tr><td>Галерея</td><td>Кілька фото туру. Вони ж підставляються у дні без власного фото</td></tr>
+      <tr><td>Програма по днях</td><td>Розгортається натисканням. Див. нижче</td></tr>
+      <tr><td>Демо-тур</td><td>«Ні» для справжнього туру. «Так» - позначка зразка для верстки</td></tr>
+    </tbody>
+  </table>
+  <div class="warn">
+    <div class="h">Адресу сторінки після публікації не міняйте</div>
+    <p>Це частина посилання, за яким люди заходять на тур. Якщо змінити її після того, як тур опубліковано, усі старі посилання перестануть працювати: у листах, у соцмережах, у рекламі. Сторінка також втратить позиції в пошуку і почне набирати їх спочатку.</p>
+  </div>
+  <h3>Програма по днях</h3>
+  <p>Кожен день на сайті виглядає як пункт, що розгортається. Всередині - короткий опис і фото дня, а під ними факти:</p>
+  <table class="trio">
+    <tbody>
+      <tr><td>Маршрут</td><td>Звідки і куди</td></tr>
+      <tr><td>Дорога</td><td>Скільки часу в переїздах</td></tr>
+      <tr><td>Навантаження</td><td>Наскільки важкий день фізично</td></tr>
+      <tr><td>Харчування</td><td>Що входить</td></tr>
+      <tr><td>Ночівля</td><td>Де ночуєте</td></tr>
+    </tbody>
+  </table>
+  <p>Фото дня необов'язкове: якщо його не додати, підставиться кадр із галереї туру. Але власне фото завжди краще - воно показує саме цей день, а не тур загалом.</p>
+</section>
+
+<section class="break">
+  <h2><span class="n">08</span>Команда</h2>
+  <p class="lead">Блок «Хто їде з вами» на головній. Людей можна додавати скільки завгодно.</p>
+  <table>
+    <thead><tr><th>Поле</th><th>Що писати</th></tr></thead>
+    <tbody>
+      <tr><td>Ім'я</td><td>Як представляєте людину гостям</td></tr>
+      <tr><td>Роль</td><td>Коротко: гід, організатор, фотограф</td></tr>
+      <tr><td>Коротко про людину</td><td>Кілька речень для картки</td></tr>
+      <tr><td>Фото</td><td>Портрет або кадр на весь зріст</td></tr>
+      <tr><td>Кадрування фото</td><td>Див. нижче</td></tr>
+      <tr><td>Instagram</td><td>Необов'язково. Тільки якщо людина не проти</td></tr>
+      <tr><td>Особиста історія</td><td>Необов'язково. Кожен абзац окремим полем</td></tr>
+    </tbody>
+  </table>
+  <h3>Кадрування фото</h3>
+  <p>Картка обрізає знімок під горизонтальний формат, і від вибору залежить, яка частина фото лишиться видимою:</p>
+  <ul>
+    <li><strong>Верх</strong> - для фото на весь зріст, щоб не зрізало голову</li>
+    <li><strong>Центр</strong> - для звичайного портрета</li>
+    <li><strong>Низ</strong> - рідко, якщо людина у нижній частині кадру</li>
+  </ul>
+  <p>Найпростіше: поставте варіант, збережіть, за дві хвилини гляньте на сайт. Не сподобалось - змініть.</p>
+  <h3>Особиста історія</h3>
+  <p>Якщо історію заповнено, під карткою з'являється кнопка «Читати історію». Якщо поле порожнє, кнопки просто немає - нічого налаштовувати не треба.</p>
+</section>
+
+<section>
+  <h2><span class="n">09</span>Відгуки</h2>
+  <p class="lead">Відгуки бувають чотирьох форматів, і кожен заповнюється по-своєму.</p>
+  <table>
+    <thead><tr><th>Формат</th><th>Що заповнювати</th></tr></thead>
+    <tbody>
+      <tr><td>Текстовий</td><td>Текст відгуку, ім'я автора, фото автора</td></tr>
+      <tr><td>Відео</td><td>Відеофайл, обкладинка, ім'я</td></tr>
+      <tr><td>Скриншот</td><td>Знімок переписки або текст</td></tr>
+      <tr><td>Фото</td><td>Фото учасника, підпис у полі тексту</td></tr>
+    </tbody>
+  </table>
+  <div class="warn">
+    <div class="h">Демо-відгук - обов'язково «Ні»</div>
+    <p>Позначка «Так» означає вигаданий зразок для верстки. Якщо лишити її на справжньому відгуку, реальна людина буде позначена в даних сайту як вигадана. Для кожного живого відгуку ставте «Ні».</p>
+  </div>
+  <h3>Про чужі фото та імена</h3>
+  <p>Instagram автора вказуйте тільки якщо людина дозволила посилатися на її профіль. Те саме стосується фото і скриншотів переписки: краще перепитати, ніж потім прибирати.</p>
+</section>
+
+<section class="break">
+  <h2><span class="n">10</span>Якщо щось пішло не так</h2>
+  <table>
+    <thead><tr><th>Повідомлення</th><th>Що робити</th></tr></thead>
+    <tbody>
+      <tr><td>Забагато спроб</td><td>Захист від підбору пароля. Зачекайте 15 хвилин</td></tr>
+      <tr><td>Панель ще не налаштована на сервері</td><td>Бракує службового файлу на хостингу. Це до того, хто налаштовував сайт</td></tr>
+      <tr><td>Токен GitHub недійсний або прострочений</td><td>Термін ключа доступу вийшов. Потрібен новий - теж до розробника</td></tr>
+      <tr><td>Дані змінилися паралельно</td><td>Хтось редагував той самий розділ одночасно. Перезавантажте сторінку і внесіть правку заново</td></tr>
+      <tr><td>Дві однакові адреси сторінки</td><td>Два тури мають однакове поле «Адреса сторінки». Змініть одне з них</td></tr>
+      <tr><td>Це не зображення</td><td>Найімовірніше HEIC з айфона. Збережіть як JPEG</td></tr>
+      <tr><td>Файл завеликий</td><td>Понад 8 МБ. Стисніть фото</td></tr>
+      <tr><td>Збережено, але на сайті без змін</td><td>Зачекайте дві-три хвилини і оновіть сторінку. Якщо не з'явилось - до розробника</td></tr>
+    </tbody>
+  </table>
+  <p>Загальне правило: <strong>помилка не ламає сайт</strong>. Якщо збереження не пройшло, на сайті лишається попередня версія - вона працює. Нічого термінового робити не треба.</p>
+</section>
+
+<section>
+  <h2><span class="n">11</span>Чого панель не змінює</h2>
+  <p class="lead">Частина сайту свідомо лишилась поза панеллю: це рідко змінюють, а зламати легко.</p>
+  <ul>
+    <li>тексти головної сторінки, заголовки блоків, меню, підвал</li>
+    <li>загальний розділ поширених запитань</li>
+    <li>юридичні документи - оферта, політика конфіденційності, умови бронювання</li>
+    <li>галерея «Емоції на наших турах»</li>
+    <li>контакти і посилання на соцмережі</li>
+  </ul>
+  <p>Усе це змінюється розробником за пів години. Якщо якийсь із цих блоків доводиться правити регулярно - скажіть, його можна винести в панель окремою вкладкою.</p>
+</section>
+
+<section>
+  <h2><span class="n">12</span>Коротка пам'ятка</h2>
+  <p class="lead">Перед тим як публікувати новий тур:</p>
+  <ul class="check">
+    <li>Назва і опис заповнені обома мовами</li>
+    <li>Адреса сторінки латиницею і більше не змінюватиметься</li>
+    <li>Дата початку у форматі <span class="mono">2026-11-14</span></li>
+    <li>Фото стиснуті, не HEIC, головне в центрі кадру</li>
+    <li>Кожен день програми має опис і факти</li>
+    <li>«Демо-тур» стоїть у положенні «Ні»</li>
+    <li>Натиснуто «Зберегти», минуло дві хвилини, сторінку сайту перевірено</li>
+  </ul>
+  <div class="end">
+    <p>ShoSho Trip. Інструкція для редактора панелі контенту. Технічний опис системи - у файлах <span class="mono">ADMIN.md</span> та <span class="mono">DEPLOY.md</span> у репозиторії проєкту.</p>
+  </div>
+</section>
+
+</body>
+</html>
